@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Wall.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=3]
+
+[node name="TestScene" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 112, 33 )
+speed = 150
+friction = 0.3
+
+[node name="Wall" parent="." instance=ExtResource( 1 )]
+position = Vector2( 8, 8 )
+
+[node name="Wall2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 8, 24 )
+
+[node name="Wall3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 8, 40 )
+
+[node name="Wall4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 8, 56 )
+
+[node name="Mob" parent="." instance=ExtResource( 3 )]
+position = Vector2( 168, 40 )
+
+[node name="ScoreTimer" type="Timer" parent="."]
