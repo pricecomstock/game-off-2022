@@ -2,7 +2,11 @@
 
 [node name="HUD" type="CanvasLayer"]
 
-[node name="Timer" type="Label" parent="."]
+[node name="TimerText" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
 text = "Hello"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
