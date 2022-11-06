@@ -28,7 +28,7 @@ position = Vector2( 8, 40 )
 position = Vector2( 8, 56 )
 
 [node name="Mob" parent="." instance=ExtResource( 3 )]
-position = Vector2( 280, 32 )
+position = Vector2( 232, 41 )
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
