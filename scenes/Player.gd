@@ -2,6 +2,9 @@ extends KinematicBody2D
 
 const UP_DIRECTION := Vector2.UP
 
+onready var weapon := $Weapon
+onready var sprite := $Sprite
+
 export var speed := 200
 export var friction := 0.25
 export var jump_strength := 1000
@@ -12,6 +15,8 @@ export var falling_gravity := 4000
 
 var _jumps_made := 0
 var _velocity := Vector2.ZERO
+
+var _direction_facing = Vector2.LEFT
 
 var _is_falling := false
 var _is_jumping := false
@@ -40,7 +45,6 @@ func apply_gravity(delta) -> void:
 
 func _process(delta):
   update_movement_states()
-    
   
   if _is_jumping:
     _jumps_made += 1
@@ -60,5 +64,12 @@ func _process(delta):
   var target_x_velocity := (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * speed
   _velocity.x += (target_x_velocity - _velocity.x) * friction
 
+  # _direction_facing = (Vector2.RIGHT if target_x_velocity > 0 else Vector2.LEFT)
+  # apply_scale(Vector2(sign(_direction_facing.x), 1))
+
 
   _velocity = move_and_slide(_velocity, UP_DIRECTION)
+
+  if Input.is_action_just_pressed("attack"):
+    print("attacking")
+    weapon.attack()

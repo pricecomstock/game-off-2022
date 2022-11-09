@@ -3,8 +3,9 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _init():
-  collision_layer = 0
-  collision_mask = 2
+  pass
+  # collision_layer = 0
+  # collision_mask = 2
 
 func _ready() -> void:
   connect("area_entered", self, "_on_area_entered")
@@ -23,10 +24,7 @@ func _on_area_entered(hitbox: HitBox) -> void:
   if owner.has_method("take_damage"):
 	  owner.take_damage(hitbox.damage)
   
-  print("hit")
   emit_signal("hit")
-
-
   
   # Disables collision later on in the frame update
-  $CollisionShape2D.set_deferred("disabled", true)
+  # $CollisionShape2D.set_deferred("disabled", true)

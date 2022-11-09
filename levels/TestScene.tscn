@@ -33,25 +33,34 @@ position = Vector2( 232, 41 )
 [node name="ScoreTimer" type="Timer" parent="."]
 
 [node name="Wall5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 96, 104 )
+position = Vector2( 96, 112 )
 
 [node name="Wall6" parent="." instance=ExtResource( 1 )]
-position = Vector2( 112, 104 )
+position = Vector2( 112, 112 )
 
 [node name="Wall7" parent="." instance=ExtResource( 1 )]
-position = Vector2( 128, 104 )
+position = Vector2( 128, 112 )
 
 [node name="Wall8" parent="." instance=ExtResource( 1 )]
-position = Vector2( 144, 104 )
+position = Vector2( 144, 112 )
 
 [node name="Wall9" parent="." instance=ExtResource( 1 )]
-position = Vector2( 160, 104 )
+position = Vector2( 160, 112 )
 
 [node name="Wall10" parent="." instance=ExtResource( 1 )]
-position = Vector2( 176, 104 )
+position = Vector2( 176, 112 )
 
 [node name="Wall11" parent="." instance=ExtResource( 1 )]
 position = Vector2( 192, 64 )
+
+[node name="Wall14" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, 80 )
+
+[node name="Wall15" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, 96 )
+
+[node name="Wall16" parent="." instance=ExtResource( 1 )]
+position = Vector2( 192, 112 )
 
 [node name="Wall12" parent="." instance=ExtResource( 1 )]
 position = Vector2( 208, 64 )
