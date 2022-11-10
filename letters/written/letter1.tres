@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://letters/Letter.gd" type="Script" id=1]
+[ext_resource path="res://art/Pixel Adventure/Items/Boxes/Box1/Idle.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+recipient_name = "John"
+body = "Hello!"
+sender = "Me"
+icon = ExtResource( 2 )
