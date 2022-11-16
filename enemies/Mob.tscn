@@ -67,6 +67,7 @@ tracks/1/keys = {
 }
 
 [node name="Mob" type="KinematicBody2D"]
+collision_layer = 9
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -78,8 +79,8 @@ region_rect = Rect2( 32, 160, 16, 16 )
 shape = SubResource( 1 )
 
 [node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 2
+collision_layer = 8
+collision_mask = 6
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]

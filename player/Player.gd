@@ -1,75 +1,52 @@
 extends KinematicBody2D
 
-const UP_DIRECTION := Vector2.UP
-
-onready var weapon := $Weapon
-onready var sprite := $Sprite
-
 export var speed := 200
-export var friction := 0.25
-export var jump_strength := 1000
-export var double_jump_strength := 800
-export var maximum_jumps := 2
-export var gravity := 4000
-export var falling_gravity := 4000
+export var friction = 0.1;
 
-var _jumps_made := 0
+export var projectile_speed = 5.0
+export var ranged_attack_cooldown_seconds = 1.0
+
+onready var shooter: Shooter = $Shooter
+onready var ranged_cooldown_timer: Timer = $RangedAttackCooldown
+
 var _velocity := Vector2.ZERO
-
-var _direction_facing = Vector2.LEFT
-
-var _is_falling := false
-var _is_jumping := false
-var _is_double_jumping := false
-var _is_jump_cancelled := false
-var _is_idling := false
-var _is_running := false
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  pass # Replace with function body.
+  # Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+  ranged_cooldown_timer.set_one_shot(true)
+  pass
 
-func update_movement_states() -> void:
-  _is_falling = _velocity.y > 0.0 and not is_on_floor()
-  _is_jumping = Input.is_action_just_pressed("jump") and is_on_floor()
-  _is_double_jumping = Input.is_action_just_pressed("jump") and _is_falling
-  _is_jump_cancelled = Input.is_action_just_released("jump") and _velocity.y < 0.0
-  _is_idling = is_on_floor() and is_zero_approx(_velocity.x)
-  _is_running = is_on_floor() and not is_zero_approx(_velocity.x)
+func process_ranged_attack():
+  if (ranged_cooldown_timer.time_left > 0):
+    return
 
-func apply_gravity(delta) -> void:
-  var current_gravity := falling_gravity if _is_falling else gravity
-  _velocity.y += current_gravity * delta
+  # TODO test
+  var shoot_direction_stick = Vector2(
+    Input.get_action_strength("aim_shoot_right") - Input.get_action_strength("aim_shoot_left"),
+    Input.get_action_strength("aim_shoot_down") - Input.get_action_strength("aim_shoot_up")
+  ).normalized()
+
+  if Input.is_action_pressed("attack"):
+    var shoot_direction_mouse = global_position.direction_to(get_global_mouse_position()).normalized()
+    shooter.shoot(shoot_direction_mouse * projectile_speed)
+    ranged_cooldown_timer.start(ranged_attack_cooldown_seconds)
+  elif shoot_direction_stick.length() > 0:
+    shooter.shoot(shoot_direction_stick * projectile_speed)
+    ranged_cooldown_timer.start(ranged_attack_cooldown_seconds)
 
 
 func _process(delta):
-  update_movement_states()
-  
-  if _is_jumping:
-    _jumps_made += 1
-    _velocity.y = -jump_strength
-  elif _is_double_jumping:
-    _jumps_made += 1
-    if _jumps_made <= maximum_jumps:
-      _velocity.y = -double_jump_strength
-  elif _is_jump_cancelled:
-    _velocity.y = 0.0
-  elif _is_idling:
-    _jumps_made = 0
-  
-  apply_gravity(delta)
-      
-      
-  var target_x_velocity := (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * speed
-  _velocity.x += (target_x_velocity - _velocity.x) * friction
-
-  # _direction_facing = (Vector2.RIGHT if target_x_velocity > 0 else Vector2.LEFT)
-  # apply_scale(Vector2(sign(_direction_facing.x), 1))
+  process_ranged_attack()
 
 
-  _velocity = move_and_slide(_velocity, UP_DIRECTION)
+func _physics_process(delta):
+  var direction := Vector2(
+    Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+    Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+  ).normalized()
 
-  if Input.is_action_just_pressed("attack"):
-    print("attacking")
-    weapon.attack()
+
+  var target_velocity = direction * speed
+  _velocity += (target_velocity - _velocity) * friction
+  _velocity = move_and_slide(_velocity)
