@@ -2,10 +2,10 @@
 
 [ext_resource path="res://art/tilemap_packed.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Hurtbox.gd" type="Script" id=2]
-[ext_resource path="res://enemies/Mob.gd" type="Script" id=3]
+[ext_resource path="res://enemies/BaseMob.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 8.0
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 8.0
@@ -70,8 +70,6 @@ tracks/1/keys = {
 collision_layer = 8
 collision_mask = 17
 script = ExtResource( 3 )
-speed = 75
-movement_time_range = Vector2( 0.5, 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -83,7 +81,7 @@ shape = SubResource( 1 )
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 4
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]

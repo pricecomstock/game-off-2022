@@ -1,6 +1,8 @@
 class_name HurtBox
 extends Area2D
 
+export var enable_knockback := false
+
 # Called when the node enters the scene tree for the first time.
 func _init():
   pass
@@ -23,6 +25,10 @@ func _on_area_entered(hitbox: HitBox) -> void:
   # owner is the root of the scene
   if owner.has_method("take_damage"):
 	  owner.take_damage(hitbox.damage)
+  
+  # owner is the root of the scene
+  if owner.has_method("take_knockback"):
+	  owner.take_knockback(hitbox.knockback_force, hitbox.global_position)
   
   emit_signal("hit")
   

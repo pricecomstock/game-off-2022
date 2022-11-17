@@ -21,13 +21,12 @@ func _ready():
   timer.start()
 
 func run_spawn_cycle() -> void:
-  print("spawn cycle")
   var scene_tree = get_tree()
   var spawners = scene_tree.get_nodes_in_group("spawners") 
   var enemies = scene_tree.get_nodes_in_group("enemies")
 
   var enemies_to_spawn : int = min(target_enemy_count - enemies.size(), max_simul_spawns)
-  print(target_enemy_count)
+  print("spawn cycle, spawning ", enemies_to_spawn, " enemies")
 
   if (enemies_to_spawn <= 0): return
 
