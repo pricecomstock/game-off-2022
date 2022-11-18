@@ -9,7 +9,6 @@ radius = 9.0
 
 [node name="MeleeMob" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-health = 2
 movement_refresh_seconds = 2.0
 movement_refresh_variance = 0.5
 speed = 100

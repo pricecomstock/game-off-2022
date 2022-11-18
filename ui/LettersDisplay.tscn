@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://letters/LettersDisplay.gd" type="Script" id=1]
+[ext_resource path="res://ui/LettersDisplay.gd" type="Script" id=1]
 [ext_resource path="res://art/Pixel Adventure/Items/Boxes/Box2/Idle.png" type="Texture" id=2]
 
 [node name="LettersDisplay" type="HBoxContainer"]

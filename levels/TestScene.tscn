@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://art/tilemap_packed.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://letters/LettersDisplay.tscn" type="PackedScene" id=4]
+[ext_resource path="res://enemies/Spikes.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/UI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://levels/TileMapDungeon.tres" type="TileSet" id=5]
 [ext_resource path="res://enemies/Spawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://enemies/Melee/MeleeMob.tscn" type="PackedScene" id=7]
@@ -315,6 +316,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Spikes" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 240, 208 )
+
 [node name="Spawner" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 448, 112 )
 entity_to_spawn = ExtResource( 7 )
@@ -335,6 +339,6 @@ position = Vector2( 59, 257 )
 entity_to_spawn = ExtResource( 7 )
 spawn_time = 1.0
 
-[node name="LettersDisplay" parent="." instance=ExtResource( 4 )]
-
 [node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="UI" parent="." instance=ExtResource( 4 )]
