@@ -5,6 +5,7 @@ var buffs: Dictionary = {}
 var debuffs: Dictionary = {}
 
 enum ModifierMode {
+	SET,
 	ADD,
 	MULTIPLY,
 	INCREASE_PERCENT,
