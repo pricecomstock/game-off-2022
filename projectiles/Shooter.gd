@@ -2,10 +2,13 @@ extends Node2D
 
 class_name Shooter
 
-# export(int, LAYERS_2D_PHYSICS) var projectile_layer := 0
-# export(int, LAYERS_2D_PHYSICS) var projectile_mask := 0
+onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 export(PackedScene) var projectile
+export(AudioStream) var sound_effect
+
+func _ready():
+  audio_player.set_stream(sound_effect)
 
 func shoot(velocity: Vector2):
   var new_projectile = projectile.instance()
