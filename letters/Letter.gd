@@ -2,6 +2,7 @@ extends Resource
 class_name Letter
 
 # TODO different icons per letter probably
+
 export var recipient_name: String
 export var body: String
 export var sender: String

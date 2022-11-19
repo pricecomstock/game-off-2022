@@ -1,12 +1,9 @@
 extends HBoxContainer
 
-var test_letter = preload("res://letters/written/letter1.tres")
 
 func _ready():
   LetterManager.connect("letters_updated", self, "update_letter_display")
   update_letter_display(LetterManager.get_letters())
-  add_letter_to_display(test_letter)
-  add_letter_to_display(test_letter)
 
 func clear() -> void:
   Util.remove_all_children(self)
@@ -18,11 +15,9 @@ func add_letter_to_display(letter: Letter) -> void:
   new_node.rect_min_size = Vector2(self.rect_size.y, self.rect_size.y)
   self.add_child(new_node)
 
-func update_letter_display(letters):
+func update_letter_display(letters_dict: Dictionary):
   clear()
 
-  # var letters := LetterManager.get_letters()
-
-  for letter in letters:
-    add_letter_to_display(letter)
+  for letter_id in letters_dict:
+    add_letter_to_display(letters_dict[letter_id])
 
