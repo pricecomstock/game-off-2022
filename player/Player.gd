@@ -34,9 +34,11 @@ func process_ranged_attack():
     var shoot_direction_mouse = global_position.direction_to(get_global_mouse_position()).normalized()
     shooter.shoot(shoot_direction_mouse * projectile_speed)
     ranged_cooldown_timer.start(ranged_attack_cooldown_seconds)
+    Events.emit_signal("player_shoot")
   elif shoot_direction_stick.length() > 0:
     shooter.shoot(shoot_direction_stick * projectile_speed)
     ranged_cooldown_timer.start(ranged_attack_cooldown_seconds)
+    Events.emit_signal("player_shoot")
 
 
 func _process(delta):

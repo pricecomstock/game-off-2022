@@ -54,6 +54,7 @@ LetterManager="*res://letters/LetterManager.gd"
 GlobalStats="*res://letters/GlobalStats.gd"
 SpawnManager="*res://enemies/SpawnManager.tscn"
 GlobalPlayerInfo="*res://player/GlobalPlayerInfo.gd"
+Events="*res://global/Events.tscn"
 
 [display]
 
