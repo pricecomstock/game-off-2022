@@ -1,11 +1,15 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://letters/Letter.gd" type="Script" id=1]
-[ext_resource path="res://art/Pixel Adventure/Items/Boxes/Box1/Idle.png" type="Texture" id=2]
+[ext_resource path="res://art/oc/envelopes/envelope.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
 
 [resource]
 script = ExtResource( 1 )
 recipient_name = "John"
 body = "Hello!"
 sender = "Me"
-icon = ExtResource( 2 )
+icon = SubResource( 1 )

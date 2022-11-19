@@ -1,5 +1,6 @@
 extends HBoxContainer
 
+export var separation := 4
 
 func _ready():
   LetterManager.connect("letters_updated", self, "update_letter_display")
