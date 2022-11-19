@@ -5,6 +5,7 @@ extends Camera2D
 export var shake_speed := 30.0
 export var shake_magnitude := 30.0
 export var shake_decay := 30.0
+export var shake_period := 2.0
 
 # Read from different parts of the noise for different axes
 const x_noise_read_pos = 0
@@ -23,7 +24,7 @@ func _ready():
   # Randomize the generated noise
   noise.seed = rand.randi()
   # Period affects how quickly the noise changes values
-  noise.period = 2
+  noise.period = shake_period
 
   process_mode = CAMERA2D_PROCESS_IDLE
   anchor_mode = ANCHOR_MODE_FIXED_TOP_LEFT

@@ -27,7 +27,7 @@ __meta__ = {
 speed = 110
 friction = 0.12
 projectile_speed = 200.0
-ranged_attack_cooldown_seconds = 0.75
+ranged_attack_cooldown_seconds = 0.45
 
 [node name="Shooter" parent="." instance=ExtResource( 4 )]
 
