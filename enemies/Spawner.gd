@@ -28,9 +28,7 @@ func spawn():
   get_tree().current_scene.add_child(entity)
 
 func _on_player_nearby(_area: Area2D):
-  print("disabling spawner")
   remove_from_group("active_spawners")
   
 func _on_player_not_nearby(_area: Area2D):
-  print("re-enabling spawner")
   add_to_group("active_spawners")
