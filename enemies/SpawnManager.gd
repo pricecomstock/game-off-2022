@@ -22,8 +22,10 @@ func _ready():
 
 func run_spawn_cycle() -> void:
   var scene_tree = get_tree()
-  var spawners = scene_tree.get_nodes_in_group("active_spawners") 
+  var spawners = scene_tree.get_nodes_in_group("active_spawners")
   var enemies = scene_tree.get_nodes_in_group("enemies")
+
+  if (!spawners): return
 
   var enemies_to_spawn : int = min(target_enemy_count - enemies.size(), max_simul_spawns)
   print("spawn cycle, spawning ", enemies_to_spawn, " enemies")

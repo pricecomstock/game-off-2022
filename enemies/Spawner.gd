@@ -25,7 +25,7 @@ func spawn():
   var entity = entity_to_spawn.instance()
 
   entity.position = position
-  get_tree().current_scene.add_child(entity)
+  get_parent().add_child(entity)
 
 func _on_player_nearby(_area: Area2D):
   remove_from_group("active_spawners")
