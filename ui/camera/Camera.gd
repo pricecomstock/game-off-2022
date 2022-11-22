@@ -27,8 +27,6 @@ func _ready():
   noise.period = shake_period
 
   process_mode = CAMERA2D_PROCESS_IDLE
-  anchor_mode = ANCHOR_MODE_FIXED_TOP_LEFT
-
 
   Events.connect("player_shoot", self, "apply_camera_shake")
 

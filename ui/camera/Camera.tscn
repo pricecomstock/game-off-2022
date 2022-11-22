@@ -3,6 +3,7 @@
 [ext_resource path="res://ui/camera/Camera.gd" type="Script" id=1]
 
 [node name="Camera2D" type="Camera2D"]
+smoothing_enabled = true
 script = ExtResource( 1 )
 shake_speed = 20.0
 shake_magnitude = 10.0

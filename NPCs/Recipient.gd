@@ -4,7 +4,6 @@ export var letter_id : int = 1
 onready var delivery_detector: Area2D = $DeliveryDetector
 
 func _ready():
-  print("dd", delivery_detector)
   delivery_detector.connect("area_entered", self, "_on_DeliveryDetector_area_entered")
   pass
 

@@ -26,8 +26,9 @@ func change_state(new_state: int) -> void:
       root.add_child(MainMenu.instance())
     GameState.IN_GAME:
       current_game_world = GameWorld.instance()
-      current_game_world.generate()
       root.add_child(current_game_world)
+      
+      current_game_world.generate()
       
 
   # cleanup previous state

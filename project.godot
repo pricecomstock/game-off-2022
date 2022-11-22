@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Chunk",
+"language": "GDScript",
+"path": "res://levels/Chunk.gd"
+}, {
 "base": "Area2D",
 "class": "HitBox",
 "language": "GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://util/Util.gd"
 } ]
 _global_script_class_icons={
+"Chunk": "",
 "HitBox": "",
 "HurtBox": "",
 "Letter": "",
@@ -45,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="game-off-2022-tell-my-family"
-run/main_scene="res://levels/TestScene.tscn"
+run/main_scene="res://ui/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
