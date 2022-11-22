@@ -47,7 +47,7 @@ func apply_camera_shake() -> void:
   current_shake_strength = shake_magnitude
 
 func enter_map_mode():
-  zoom = Vector2(4,4)
+  zoom = Vector2(8,8)
   
 func exit_map_mode():
   zoom = Vector2(1,1)

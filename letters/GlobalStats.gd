@@ -22,7 +22,6 @@ class Buff:
 
 func _ready():
 	current_stats = Stats.new()
-	print(current_stats.player_speed)
 	current_stats["player_speed"] +=1
 
 func reset():

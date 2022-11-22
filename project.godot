@@ -170,7 +170,8 @@ map={
 2d_physics/layer_4="enemy-hurtboxes"
 2d_physics/layer_5="walls"
 2d_physics/layer_6="delivery"
-2d_physics/layer_7="player-nearby"
+2d_physics/layer_7="player-safety"
+2d_physics/layer_8="player-nearby"
 
 [physics]
 

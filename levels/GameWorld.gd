@@ -22,15 +22,17 @@ func _init():
   pass
 
 func generate():
-  for x_chunk_i in range(world_size.x + 2):
-    for y_chunk_i in range(world_size.y + 2):
+  var total_world_size = world_size + Vector2(2,2)
+  for x_chunk_i in range(total_world_size.x):
+    for y_chunk_i in range(total_world_size.y):
       var chunk
-      if x_chunk_i == 0 or y_chunk_i == 0 or x_chunk_i == world_size.x - 1 or y_chunk_i == world_size.y - 1: # border chunk
+      if x_chunk_i == 0 or y_chunk_i == 0 or x_chunk_i == total_world_size.x - 1 or y_chunk_i == total_world_size.y - 1: # border chunk
         chunk = water_chunk.instance()
       else:
         chunk = random_chunks[randi() % random_chunks.size()].instance()
 
       var chunk_offset := Vector2(x_chunk_i * chunk_size.x, y_chunk_i * chunk_size.y)
+      var chunk_world_offset := tile_map_world.map_to_world(chunk_offset)
       var chunk_tile_map_ground : TileMap = chunk.get_node("TileMapGround") as TileMap
       var chunk_tile_map_world : TileMap = chunk.get_node("TileMapWorld") as TileMap
       var chunk_y_sort = chunk.get_node("YSort");
@@ -41,7 +43,7 @@ func generate():
       # TODO fix this lol
       for entity in chunk_y_sort.get_children():
         chunk_y_sort.remove_child(entity)
-        entity.position 
+        entity.position = chunk_world_offset + entity.position
         y_sort.add_child(entity)
   
   var player = player_scene.instance()
@@ -59,5 +61,3 @@ func load_world_chunks():
   random_chunks = []
   for file in world_chunk_files:
     random_chunks.append(load(file))
-  print(random_chunks)
-  

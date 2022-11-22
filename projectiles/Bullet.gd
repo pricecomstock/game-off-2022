@@ -23,5 +23,4 @@ func _physics_process(delta):
   position += direction * speed * delta
 
 func _on_impact(_body: Node) -> void:
-  print("hit something")
   queue_free()

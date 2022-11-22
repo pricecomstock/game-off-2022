@@ -17,7 +17,7 @@ height = 6.0
 radius = 11.0
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 114.004
+radius = 1305.01
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 17
@@ -66,4 +66,13 @@ collision_mask = 64
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SafetyRadius"]
+shape = SubResource( 5 )
+
+[node name="NearbyRadius" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NearbyRadius"]
+show_behind_parent = true
 shape = SubResource( 5 )
