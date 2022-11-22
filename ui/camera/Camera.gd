@@ -45,3 +45,15 @@ func get_noise_offset(delta) -> Vector2:
 
 func apply_camera_shake() -> void:
   current_shake_strength = shake_magnitude
+
+func enter_map_mode():
+  zoom = Vector2(4,4)
+  
+func exit_map_mode():
+  zoom = Vector2(1,1)
+
+func _unhandled_input(event: InputEvent):
+  if (event.is_action_pressed("map")):
+    enter_map_mode()
+  if (event.is_action_released("map")):
+    exit_map_mode()

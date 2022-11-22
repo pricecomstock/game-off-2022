@@ -25,7 +25,7 @@ func generate():
   for x_chunk_i in range(world_size.x + 2):
     for y_chunk_i in range(world_size.y + 2):
       var chunk
-      if x_chunk_i == 0 or y_chunk_i == 0: # border chunk
+      if x_chunk_i == 0 or y_chunk_i == 0 or x_chunk_i == world_size.x - 1 or y_chunk_i == world_size.y - 1: # border chunk
         chunk = water_chunk.instance()
       else:
         chunk = random_chunks[randi() % random_chunks.size()].instance()
