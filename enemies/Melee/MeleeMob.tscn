@@ -9,9 +9,10 @@ radius = 9.0
 
 [node name="MeleeMob" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-movement_refresh_seconds = 2.0
-movement_refresh_variance = 0.5
 speed = 100
+min_move_time = 0.2
+max_move_time = 0.45
+random_direction_probability = 0.1
 
 [node name="HitBox" type="Area2D" parent="." index="5"]
 collision_layer = 2
