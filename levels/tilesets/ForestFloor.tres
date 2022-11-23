@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=67 format=2]
+[gd_resource type="TileSet" load_steps=68 format=2]
 
 [ext_resource path="res://art/forest_topdown/plain_.png" type="Texture" id=1]
 
@@ -196,6 +196,11 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=65]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="NavigationPolygon" id=66]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 ) ]
 
 [resource]
 0/name = "plain_.png 0"
@@ -620,6 +625,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 1/tile_mode = 0
 1/occluder_offset = Vector2( 0, 0 )
 1/navigation_offset = Vector2( 0, 0 )
+1/navigation = SubResource( 66 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 1/shape_one_way = false

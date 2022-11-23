@@ -37,7 +37,7 @@ __meta__ = {
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Spawner" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 304, 32 )
+position = Vector2( 192, 112 )
 entity_to_spawn = ExtResource( 1 )
 spawn_time = 1.0
 

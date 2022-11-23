@@ -42,14 +42,14 @@ entity_to_spawn = ExtResource( 1 )
 spawn_time = 1.0
 
 [node name="Spawner2" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 288, 224 )
+position = Vector2( 448, 192 )
 entity_to_spawn = ExtResource( 1 )
 spawn_time = 1.0
 
 [node name="Spawner3" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 80, 320 )
+position = Vector2( 80, 288 )
 entity_to_spawn = ExtResource( 1 )
 spawn_time = 1.0
 
 [node name="Recipient" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 288, 80 )
+position = Vector2( 128, 432 )
