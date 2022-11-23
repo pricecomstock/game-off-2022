@@ -4,6 +4,9 @@ extends Node2D
 export(PackedScene) var test_chunk
 export(PackedScene) var water_chunk
 export(PackedScene) var player_scene
+export(PackedScene) var extraction_scene
+
+export(float) var minimum_extraction_distance = 512.0
 
 export var chunk_size = Vector2(16, 16)
 export var world_size = Vector2(4,4)
@@ -13,6 +16,7 @@ onready var tile_map_ground : TileMap = $TileMapGround
 onready var tile_map_world : TileMap = $YSort/TileMapWorld
 
 var random_chunks = []
+var player_spawn_position : Vector2 = Vector2.ZERO
 
 func _ready():
   randomize()
@@ -22,6 +26,11 @@ func _init():
   pass
 
 func generate():
+  assemble_random_chunks()  
+  spawn_player()
+  spawn_extraction()
+
+func assemble_random_chunks():
   var total_world_size = world_size + Vector2(2,2)
   for x_chunk_i in range(total_world_size.x):
     for y_chunk_i in range(total_world_size.y):
@@ -40,17 +49,37 @@ func generate():
       Util.merge_tile_map(tile_map_ground, chunk_tile_map_ground, chunk_size, chunk_offset)
       Util.merge_tile_map(tile_map_world, chunk_tile_map_world, chunk_size, chunk_offset)
 
-      for entity in chunk_y_sort.get_children():
-        chunk_y_sort.remove_child(entity)
-        entity.position = chunk_world_offset + entity.position
-        y_sort.add_child(entity)
-  
+      move_children_to_new_parent(chunk_y_sort, y_sort, chunk_world_offset)
+
+func move_children_to_new_parent(node: Node2D, new_parent: Node2D, position_offset: Vector2 = Vector2.ZERO):
+  for entity in node.get_children():
+    node.remove_child(entity)
+    entity.position = position_offset + entity.position
+    new_parent.add_child(entity)
+
+func spawn_player():
   var player_spawn_points = get_tree().get_nodes_in_group("player_spawn_points")
   var player_spawn_point = player_spawn_points[randi() % player_spawn_points.size()]
   
   var player = player_scene.instance()
   player.position = player_spawn_point.position
+  player_spawn_position = player_spawn_point.position
   y_sort.add_child(player)
+
+func spawn_extraction():
+  var extraction_spawn_points = get_tree().get_nodes_in_group("player_spawn_points")
+  var spawned = false
+  
+  while not spawned:
+    var extraction_spawn_point = extraction_spawn_points[randi() % extraction_spawn_points.size()]
+    var distance_to_player_spawn := player_spawn_position.distance_to(extraction_spawn_point.position)
+    
+    if distance_to_player_spawn > minimum_extraction_distance:
+      var extraction = extraction_scene.instance()
+      extraction.position = extraction_spawn_point.position
+      y_sort.add_child(extraction)
+      spawned = true
+  
 
 func _unhandled_input(event: InputEvent):
   if (event.is_action_pressed("menu")):
