@@ -10,7 +10,7 @@ radius = 9.0
 [node name="MeleeMob" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 speed = 100
-min_move_time = 0.2
+min_move_time = 0.3
 max_move_time = 0.45
 random_direction_probability = 0.1
 

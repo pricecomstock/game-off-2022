@@ -14,20 +14,22 @@ export var world_size = Vector2(4,4)
 onready var y_sort : YSort = $YSort
 onready var tile_map_ground : TileMap = $TileMapGround
 onready var tile_map_world : TileMap = $YSort/TileMapWorld
+onready var camera : Camera2D = $Camera2D
 
 var random_chunks = []
-var player_spawn_position : Vector2 = Vector2.ZERO
+var original_player_spawn_position : Vector2 = Vector2.ZERO
 
 func _ready():
   randomize()
   load_world_chunks()
+  Events.connect("player_death", self, "_on_player_death")
 
 func _init():
   pass
 
 func generate():
-  assemble_random_chunks()  
-  spawn_player()
+  assemble_random_chunks()
+  spawn_initial_player()
   spawn_extraction()
 
 func assemble_random_chunks():
@@ -57,14 +59,19 @@ func move_children_to_new_parent(node: Node2D, new_parent: Node2D, position_offs
     entity.position = position_offset + entity.position
     new_parent.add_child(entity)
 
-func spawn_player():
+func spawn_initial_player():
   var player_spawn_points = get_tree().get_nodes_in_group("player_spawn_points")
   var player_spawn_point = player_spawn_points[randi() % player_spawn_points.size()]
   
   var player = player_scene.instance()
   player.position = player_spawn_point.position
-  player_spawn_position = player_spawn_point.position
+  original_player_spawn_position = player_spawn_point.position
   y_sort.add_child(player)
+
+  activate_player(player)
+
+func activate_player(player):
+  player.take_camera()
 
 func spawn_extraction():
   var extraction_spawn_points = get_tree().get_nodes_in_group("player_spawn_points")
@@ -72,7 +79,7 @@ func spawn_extraction():
   
   while not spawned:
     var extraction_spawn_point = extraction_spawn_points[randi() % extraction_spawn_points.size()]
-    var distance_to_player_spawn := player_spawn_position.distance_to(extraction_spawn_point.position)
+    var distance_to_player_spawn := original_player_spawn_position.distance_to(extraction_spawn_point.position)
     
     if distance_to_player_spawn > minimum_extraction_distance:
       var extraction = extraction_scene.instance()
@@ -80,14 +87,18 @@ func spawn_extraction():
       y_sort.add_child(extraction)
       spawned = true
   
-
 func _unhandled_input(event: InputEvent):
   if (event.is_action_pressed("menu")):
     GameManager.change_state(GameManager.GameState.MENU)
-
 
 func load_world_chunks():
   var world_chunk_files = Util.get_file_paths_in_directory("res://levels/chunks/random")
   random_chunks = []
   for file in world_chunk_files:
     random_chunks.append(load(file))
+
+func _on_player_death(location: Vector2):
+  var new_player = player_scene.instance()
+  new_player.position = location - Vector2.LEFT * 50
+  y_sort.add_child(new_player)
+  activate_player(new_player)

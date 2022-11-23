@@ -6,4 +6,6 @@ func _ready():
   pass
 
 func player_global_position():
-  return _player.global_position
+  if is_instance_valid(_player):
+    return _player.global_position
+  

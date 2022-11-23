@@ -20,10 +20,18 @@ func move_for_time(direction: Vector2, seconds: float):
 
 
 func set_movement():
-  var player_direction = global_position.direction_to(GlobalPlayerInfo.player_global_position())
   var move_time = rand_range(min_move_time, max_move_time)
+  var player_position = GlobalPlayerInfo.player_global_position()
+
+  # player is dead
+  if !player_position:
+    move_for_time(Vector2.ZERO, move_time)
+    return
+
+  var player_direction = global_position.direction_to(player_position)
+
   if (randf() < random_direction_probability):
-    var move_direction = player_direction.rotated(rand_range(0.20,0.30)*TAU)
+    var move_direction = player_direction.rotated(randf()*TAU)
     move_for_time(move_direction, move_time)
   else:
     move_for_time(player_direction, move_time)
