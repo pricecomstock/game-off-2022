@@ -75,6 +75,7 @@ GlobalPlayerInfo="*res://player/GlobalPlayerInfo.gd"
 Events="*res://global/Events.tscn"
 GameManager="*res://global/GameManager.tscn"
 DialogueManager="*res://dialogue/DialogueManager.tscn"
+CameraManager="*res://ui/camera/CameraManager.gd"
 
 [display]
 
@@ -189,6 +190,7 @@ map={
 [physics]
 
 common/enable_pause_aware_picking=true
+common/physics_interpolation=true
 
 [rendering]
 
