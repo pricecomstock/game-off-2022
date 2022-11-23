@@ -40,15 +40,16 @@ func generate():
       Util.merge_tile_map(tile_map_ground, chunk_tile_map_ground, chunk_size, chunk_offset)
       Util.merge_tile_map(tile_map_world, chunk_tile_map_world, chunk_size, chunk_offset)
 
-      # TODO fix this lol
       for entity in chunk_y_sort.get_children():
         chunk_y_sort.remove_child(entity)
         entity.position = chunk_world_offset + entity.position
         y_sort.add_child(entity)
   
+  var player_spawn_points = get_tree().get_nodes_in_group("player_spawn_points")
+  var player_spawn_point = player_spawn_points[randi() % player_spawn_points.size()]
+  
   var player = player_scene.instance()
-  var map_pos := tile_map_world.map_to_world(Vector2(45, 45))
-  player.position = map_pos
+  player.position = player_spawn_point.position
   y_sort.add_child(player)
 
 func _unhandled_input(event: InputEvent):

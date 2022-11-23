@@ -9,15 +9,15 @@ onready var player_safety_detector : Area2D = $PlayerSafetyDetector
 onready var player_nearby_detector : Area2D = $PlayerNearbyDetector
 onready var sprite : Sprite = $Sprite
 
-func _process(delta):
-  if is_in_group("active_spawners"):
-    sprite.visible = true
-  else:
-    sprite.visible = false
+# func _process(delta):
+#   if is_in_group("active_spawners"):
+#     sprite.visible = true
+#   else:
+#     sprite.visible = false
 
 func _ready():
   add_to_group("spawners")
-  # hide() # don't show in game
+  hide() # don't show in game
   spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
   spawn_timer.start(spawn_time)
 
