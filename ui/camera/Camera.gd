@@ -19,6 +19,7 @@ onready var noise = OpenSimplexNoise.new()
 
 func _ready():
   make_current()
+  CameraManager.camera = self
 
   rand.randomize()
   # Randomize the generated noise
@@ -30,7 +31,7 @@ func _ready():
 
   Events.connect("player_shoot", self, "apply_camera_shake")
 
-func _process(delta):
+func _physics_process(delta):
   # I'm pretty sure this is framerate dependent because it sort of multiplies delta across frames
   current_shake_strength = lerp(current_shake_strength, 0, shake_decay * delta)
   offset = get_noise_offset(delta)
