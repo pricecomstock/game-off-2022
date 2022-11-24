@@ -22,7 +22,7 @@ var original_player_spawn_position : Vector2 = Vector2.ZERO
 func _ready():
   randomize()
   load_world_chunks()
-  Events.connect("player_death", self, "_on_player_death")
+  Events.connect("player_death_complete", self, "_on_player_death_complete")
 
 func _init():
   pass
@@ -97,7 +97,7 @@ func load_world_chunks():
   for file in world_chunk_files:
     random_chunks.append(load(file))
 
-func _on_player_death(location: Vector2):
+func _on_player_death_complete(location: Vector2):
   var new_player = player_scene.instance()
   new_player.position = location - Vector2.LEFT * 50
   y_sort.add_child(new_player)

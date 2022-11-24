@@ -4,6 +4,7 @@
 [ext_resource path="res://Corpse.gd" type="Script" id=2]
 
 [node name="Corpse" type="Node2D"]
+z_index = -2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
