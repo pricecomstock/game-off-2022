@@ -7,7 +7,7 @@ signal health_change
 signal health_zero
 
 
-export var health := 1
+export var starting_health := 1
 export var speed := 200
 export var friction = 0.1;
 
@@ -21,6 +21,7 @@ export(PackedScene) var respawn_scene
 
 var can_take_damage = true
 var controls_enabled := true
+var current_health : int
 
 onready var shooter: Shooter = $Shooter
 onready var ranged_cooldown_timer: Timer = $RangedAttackCooldown
@@ -36,7 +37,15 @@ var _velocity := Vector2.ZERO
 func _ready():
   GlobalPlayerInfo._player = self
   ranged_cooldown_timer.set_one_shot(true)
+
+# Runs on initial and respawn
+func initialize():
+  show()
+  animation_player.play("Idle")
   _velocity = Vector2.ZERO
+  controls_enabled = true
+  current_health = starting_health
+
 
 func process_ranged_attack():
   if (ranged_cooldown_timer.time_left > 0):
@@ -83,10 +92,10 @@ func take_damage(amount: int) -> void:
 
   # animation_player.play('hit')
 
-  health -= amount
-  emit_signal("health_change", health)
+  current_health -= amount
+  emit_signal("health_change", current_health)
 
-  if (health <= 0):
+  if (current_health <= 0):
     emit_signal("health_zero")
     # yield(animation_player, "animation_finished")
     kill()
@@ -95,6 +104,7 @@ func take_damage(amount: int) -> void:
 func take_knockback(amount, from_location: Vector2):
   if !can_take_damage:
     return
+
   var direction = from_location.direction_to(global_position)
   _velocity += direction * amount
 
@@ -141,8 +151,7 @@ func respawn():
   set_invulnerability_until(respawn_player, "respawn_finished")
   
   yield(respawn_player, "respawn_finished")
-  show()
-  controls_enabled = true
+  initialize()
 
   set_invulnerability_timer(spawn_invulnerability_seconds)
 

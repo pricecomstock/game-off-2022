@@ -14,6 +14,7 @@ export var health := 1
 func _ready():
   rng.randomize()
   add_to_group("enemies")
+  Events.connect("player_death", self, "_on_player_death")
 
 func _physics_process(delta):
   move_and_slide(velocity)
@@ -35,3 +36,8 @@ func take_knockback(amount, from_location: Vector2):
 
 func kill() -> void:
   get_parent().remove_child(self)
+  queue_free()
+
+func _on_player_death(location: Vector2) -> void:
+  print("Reacting to player death")
+  kill()
