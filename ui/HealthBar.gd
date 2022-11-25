@@ -26,4 +26,4 @@ func update_healthbar():
   print("progress", progress)
   progress.set_max(max_health)
   progress.set_value(current_health)
-  label.text = format_string % [current_health, max_health]
+  label.text = format_string % [max(current_health, 0), max_health]
