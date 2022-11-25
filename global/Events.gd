@@ -7,6 +7,8 @@ signal player_death_complete(location)
 
 # Details
 signal player_shoot
+signal player_health_change(amount)
+signal player_max_health_change(amount)
 
 func _ready():
   pass

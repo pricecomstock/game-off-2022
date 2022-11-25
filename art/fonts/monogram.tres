@@ -3,5 +3,4 @@
 [ext_resource path="res://art/fonts/monogram.ttf" type="DynamicFontData" id=1]
 
 [resource]
-extra_spacing_bottom = -4
 font_data = ExtResource( 1 )

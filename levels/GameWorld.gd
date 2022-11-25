@@ -72,7 +72,7 @@ func spawn_initial_player():
   activate_player(player)
 
 func activate_player(player):
-  player.take_camera()
+  player.initialize()
 
 func spawn_extraction():
   var extraction_spawn_points = get_tree().get_nodes_in_group("player_spawn_points")

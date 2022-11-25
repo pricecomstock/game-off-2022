@@ -6,8 +6,7 @@ extends KinematicBody2D
 signal health_change
 signal health_zero
 
-
-export var starting_health := 1
+export var max_health := 1
 export var speed := 200
 export var friction = 0.1;
 
@@ -40,11 +39,14 @@ func _ready():
 
 # Runs on initial and respawn
 func initialize():
+  take_camera()
   show()
   animation_player.play("Idle")
   _velocity = Vector2.ZERO
   controls_enabled = true
-  current_health = starting_health
+  current_health = max_health
+  Events.emit_signal("player_max_health_change", max_health)
+  Events.emit_signal("player_health_change", current_health)
 
 
 func process_ranged_attack():
@@ -94,6 +96,7 @@ func take_damage(amount: int) -> void:
 
   current_health -= amount
   emit_signal("health_change", current_health)
+  Events.emit_signal("player_health_change", current_health)
 
   if (current_health <= 0):
     emit_signal("health_zero")
