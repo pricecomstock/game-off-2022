@@ -3,7 +3,7 @@ extends Node
 signal letters_updated(letters_dict)
 signal letter_added(letter_id, letter)
 
-var test_letter = preload("res://letters/written/letter1.tres")
+export(Resource) var letter_generator
 
 var letters_dict : Dictionary = {} setget ,get_letters
 
@@ -11,7 +11,7 @@ var next_letter_id := 1
 
 func _ready():
   clear()
-  add_letter(test_letter)
+  Events.connect("player_respawned", self, "_on_player_respawned")
 
 func get_letters() -> Dictionary:
   return letters_dict
@@ -28,6 +28,11 @@ func add_letter(letter: Letter):
       
   next_letter_id += 1
 
+func add_random_letter():
+  print("letter_generator", letter_generator)
+  var letter = letter_generator.generate_letter()
+  add_letter(letter)
+
 func remove_letter(id: int):
   letters_dict.erase(id)
   emit_signal("letters_updated", letters_dict)
@@ -38,3 +43,6 @@ func has_letter(id: int):
 func deliver_letter(id: int):
   remove_letter(id)
   print("delivered letter ", id)
+
+func _on_player_respawned(_location):
+  add_random_letter()

@@ -22,7 +22,6 @@ var original_player_spawn_position : Vector2 = Vector2.ZERO
 func _ready():
   randomize()
   load_world_chunks()
-  Events.connect("player_death_complete", self, "_on_player_death_complete")
   LetterManager.connect("letter_added", self, "_on_letter_added")
 
 func _init():
@@ -97,12 +96,6 @@ func load_world_chunks():
   random_chunks = []
   for file in world_chunk_files:
     random_chunks.append(load(file))
-
-func _on_player_death_complete(location: Vector2):
-  var new_player = player_scene.instance()
-  new_player.position = location - Vector2.LEFT * 50
-  y_sort.add_child(new_player)
-  activate_player(new_player)
 
 func _on_letter_added(letter_id, _letter):
   var houses = get_tree().get_nodes_in_group("available_houses")

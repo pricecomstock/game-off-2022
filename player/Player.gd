@@ -155,6 +155,7 @@ func respawn():
   
   yield(respawn_player, "respawn_finished")
   initialize()
+  Events.emit_signal("player_respawned", global_position)
 
   set_invulnerability_timer(spawn_invulnerability_seconds)
 

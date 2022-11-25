@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://letters/LetterGenerator.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+letter_bodies = [ "Dear Tom, I've enjoyed being neighbors with you and want you to know that I was thinking about you in my dying moments", "Hello, getting shot really hurts", "Ok I'm dead" ]
+colors = [ Color( 0.85098, 0.356863, 0.603922, 1 ), Color( 0.741176, 0.317647, 0.352941, 1 ), Color( 0.839216, 0.603922, 0.305882, 1 ), Color( 0.580392, 0.878431, 0.572549, 1 ), Color( 0.133333, 0.388235, 0.419608, 1 ), Color( 0.270588, 0.631373, 0.870588, 1 ), Color( 0.886275, 0.94902, 0.4, 1 ) ]

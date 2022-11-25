@@ -1,14 +1,12 @@
 extends Resource
 class_name Letter
 
-# TODO different icons per letter probably
-
 export var body: String
-export var icon: Texture
+export var color: Color
 
 func _init(
-	p_body = "",
-	p_icon = null
+  p_body = "",
+  p_color = Color.black
 ):
-	icon = p_icon
-	body = p_body
+  color = p_color
+  body = p_body

@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/LettersDisplay.gd" type="Script" id=1]
+[ext_resource path="res://art/oc/envelopes/envelope.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 5, 16, 10 )
 
 [node name="LettersDisplay" type="HBoxContainer"]
 anchor_right = 1.0
@@ -9,3 +14,4 @@ margin_bottom = 48.0
 rect_scale = Vector2( 0.5, 0.5 )
 alignment = 2
 script = ExtResource( 1 )
+letter_icon = SubResource( 1 )

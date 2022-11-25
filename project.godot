@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://letters/Letter.gd"
 }, {
+"base": "Resource",
+"class": "LetterGenerator",
+"language": "GDScript",
+"path": "res://letters/LetterGenerator.gd"
+}, {
 "base": "Control",
 "class": "LetterView",
 "language": "GDScript",
@@ -65,6 +70,7 @@ _global_script_class_icons={
 "House": "",
 "HurtBox": "",
 "Letter": "",
+"LetterGenerator": "",
 "LetterView": "",
 "PlayerSpawnPoint": "",
 "SharedInt": "",
@@ -80,7 +86,6 @@ config/icon="res://icon.png"
 
 [autoload]
 
-LetterManager="*res://letters/LetterManager.gd"
 GlobalStats="*res://letters/GlobalStats.gd"
 SpawnManager="*res://enemies/SpawnManager.tscn"
 GlobalPlayerInfo="*res://player/GlobalPlayerInfo.gd"
@@ -88,6 +93,7 @@ Events="*res://global/Events.tscn"
 GameManager="*res://global/GameManager.tscn"
 DialogueManager="*res://dialogue/DialogueManager.tscn"
 CameraManager="*res://ui/camera/CameraManager.gd"
+LetterManager="*res://letters/LetterManager.tscn"
 
 [display]
 

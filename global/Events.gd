@@ -3,7 +3,7 @@ extends Node
 
 signal player_extraction
 signal player_death(location)
-signal player_death_complete(location)
+signal player_respawned(location)
 
 # Details
 signal player_shoot

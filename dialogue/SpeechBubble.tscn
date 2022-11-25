@@ -47,7 +47,7 @@ grow_vertical = 0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
 margin_right = 175.0
-margin_bottom = 65.0
+margin_bottom = 52.0
 texture = ExtResource( 1 )
 region_rect = Rect2( 2, 3, 11, 13 )
 patch_margin_left = 5
@@ -59,21 +59,21 @@ axis_stretch_vertical = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_right = 175.0
-margin_bottom = 65.0
+margin_bottom = 52.0
 custom_constants/margin_top = 5
 custom_constants/margin_bottom = 8
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/MarginContainer"]
 margin_top = 5.0
 margin_right = 175.0
-margin_bottom = 57.0
+margin_bottom = 44.0
 size_flags_vertical = 4
 
 [node name="BubbleText" type="Label" parent="MarginContainer/MarginContainer/CenterContainer"]
 unique_name_in_owner = true
 margin_left = 12.0
 margin_right = 162.0
-margin_bottom = 52.0
+margin_bottom = 39.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 150, 0 )
@@ -81,9 +81,7 @@ size_flags_vertical = 1
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_constants/line_spacing = 0
 custom_fonts/font = ExtResource( 2 )
-text = "oh no i am dying.
-
-what if i said a lot more stuff?"
+text = "Shit, I'm dying! Please avenge me and deliver this letter!"
 valign = 1
 autowrap = true
 percent_visible = 0.0

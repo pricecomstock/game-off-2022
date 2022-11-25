@@ -4,6 +4,7 @@ signal letter_inspected
 signal inspection_stopped
 
 export var separation := 4
+export(Texture) var letter_icon
 
 func _ready():
   LetterManager.connect("letters_updated", self, "update_letter_display")
@@ -14,7 +15,7 @@ func clear() -> void:
 
 func add_letter_to_display(letter_id: int, letter: Letter) -> void:
   var new_node := TextureRect.new()
-  new_node.texture = letter.icon
+  new_node.texture = letter_icon
   new_node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT;
   new_node.rect_min_size = Vector2(self.rect_size.y, self.rect_size.y)
 
