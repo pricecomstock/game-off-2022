@@ -23,6 +23,7 @@ func _ready():
   randomize()
   load_world_chunks()
   Events.connect("player_death_complete", self, "_on_player_death_complete")
+  LetterManager.connect("letter_added", self, "_on_letter_added")
 
 func _init():
   pass
@@ -102,3 +103,13 @@ func _on_player_death_complete(location: Vector2):
   new_player.position = location - Vector2.LEFT * 50
   y_sort.add_child(new_player)
   activate_player(new_player)
+
+func _on_letter_added(letter_id, _letter):
+  var houses = get_tree().get_nodes_in_group("available_houses")
+  if houses.size() == 0:
+    # if we're out, label all our houses as available for reuse
+    for house in get_tree().get_nodes_in_group("houses"):
+      house.add_to_group("available_houses")
+      
+  var spawn_house = houses[randi() % houses.size()] as House
+  spawn_house.spawn_recipient(letter_id)

@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://art/oc/envelopes/letter.png" type="Texture" id=1]
+[ext_resource path="res://LetterView.gd" type="Script" id=2]
+[ext_resource path="res://art/fonts/monogram.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 128, 112 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 160, 128, 80 )
+
+[sub_resource type="DynamicFont" id=4]
+extra_spacing_bottom = -4
+font_data = ExtResource( 3 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 272, 128, 112 )
+
+[node name="LetterView" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -512.0
+margin_bottom = -232.0
+rect_min_size = Vector2( 256, 256 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 2 )
+
+[node name="EnvelopeBack" type="TextureRect" parent="."]
+margin_right = 128.0
+margin_bottom = 128.0
+rect_scale = Vector2( 2, 2 )
+texture = SubResource( 1 )
+
+[node name="Paper" type="TextureRect" parent="."]
+margin_top = 32.0
+margin_right = 128.0
+margin_bottom = 136.0
+rect_scale = Vector2( 2, 2 )
+texture = SubResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Paper"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 6.0
+margin_right = 279.0
+margin_bottom = 135.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_constants/margin_right = 24
+custom_constants/margin_top = 24
+custom_constants/margin_left = 24
+
+[node name="LetterText" type="Label" parent="Paper/MarginContainer"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 368.0
+margin_bottom = 213.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Dearest Wife:
+
+I hope this finds you well. I am afraid I have died on the battlefield. Yes, that's right, I'm KIA, just like that stupid car you wanted.
+
+For years I dreamed of a nice BMW. Feeling the solid hum of a V6 as I rev the engine up to drive into my dreams.
+
+But you couldn't have it that way. You wanted a family car. A Kia fucking Sorento. I hope every time you look at that car, you think of me and my sad fucking stupid little corpse rotting on the plains of Fightland.
+
+Regards,
+Richard"
+autowrap = true
+
+[node name="EnvelopeFront" type="TextureRect" parent="."]
+margin_right = 128.0
+margin_bottom = 128.0
+rect_scale = Vector2( 2, 2 )
+texture = SubResource( 2 )

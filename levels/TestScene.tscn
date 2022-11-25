@@ -2,7 +2,7 @@
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://enemies/Spikes.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://levels/TileMapDungeon.tres" type="TileSet" id=5]
 [ext_resource path="res://enemies/Spawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://enemies/Melee/MeleeMob.tscn" type="PackedScene" id=7]

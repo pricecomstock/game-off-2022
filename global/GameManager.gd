@@ -4,6 +4,7 @@ signal game_state_change(new_state, previous_state)
 
 var GameWorld = preload("res://levels/GameWorld.tscn")
 var MainMenu = preload("res://ui/MainMenu.tscn")
+var Hud = preload("res://ui/HUD.tscn")
 var current_game_world
 
 enum GameState {MENU, IN_GAME}
@@ -29,6 +30,8 @@ func change_state(new_state: int) -> void:
       root.add_child(current_game_world)
       
       current_game_world.generate()
+
+      root.add_child(Hud.instance())
       
 
   # cleanup previous state

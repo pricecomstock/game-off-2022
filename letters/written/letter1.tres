@@ -9,7 +9,7 @@ region = Rect2( 0, 0, 16, 16 )
 
 [resource]
 script = ExtResource( 1 )
-recipient_name = "John"
-body = "Hello!"
-sender = "Me"
+recipient_name = ""
+body = "Hello! This is a test letter"
+sender = ""
 icon = SubResource( 1 )
