@@ -84,7 +84,7 @@ func _physics_process(delta):
   ).normalized()
 
 
-  var target_velocity = direction * speed
+  var target_velocity = direction * speed * GlobalStats.get_stat(Stats.ATTRIBUTES.PLAYER_SPEED_MULTIPLIER)
   _velocity += (target_velocity - _velocity) * friction
   _velocity = move_and_slide(_velocity)
 

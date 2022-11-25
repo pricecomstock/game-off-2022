@@ -8,12 +8,13 @@ var current_stats
 func get_base_stats() -> Dictionary:
   var stats = {}
   for attr in Stats.ATTRIBUTES:
-    stats[attr] = 1.0
+    stats[Stats.ATTRIBUTES[attr]] = 1.0
   
   return stats
 
 func _ready():
   reset()
+  print(current_stats)
 
 func reset():
   current_stats = get_base_stats()
