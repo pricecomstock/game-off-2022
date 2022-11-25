@@ -3,6 +3,7 @@ extends Node
 signal letters_updated(letters_dict)
 signal letter_added(letter_id, letter)
 
+export var show_on_add_seconds := 3.0
 export(Resource) var letter_generator
 
 var letters_dict : Dictionary = {} setget ,get_letters
@@ -22,11 +23,17 @@ func clear():
 
 func add_letter(letter: Letter):
   var letter_id = next_letter_id
-  letters_dict[next_letter_id] = letter
+  next_letter_id += 1
+
+  letter.id = letter_id
+  letters_dict[letter_id] = letter
   emit_signal("letters_updated", letters_dict)
   emit_signal("letter_added", letter_id, letter)
+  
+  GameManager.temp_pause(show_on_add_seconds)
+  yield(GameManager, "unpaused")
+
       
-  next_letter_id += 1
 
 func add_random_letter():
   print("letter_generator", letter_generator)

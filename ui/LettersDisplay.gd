@@ -8,10 +8,19 @@ export(Texture) var letter_icon
 
 func _ready():
   LetterManager.connect("letters_updated", self, "update_letter_display")
+  LetterManager.connect("letter_added", self, "_on_letter_added")
   update_letter_display(LetterManager.get_letters())
 
 func clear() -> void:
   Util.remove_all_children(self)
+
+func _on_letter_added(letter_id, _letter):
+  inspect_letter(letter_id)
+
+  # yikes, assuming paused somewhere but probably ok
+  yield(GameManager, "unpaused")
+  stop_inspect()
+
 
 func add_letter_to_display(letter_id: int, letter: Letter) -> void:
   var new_node := TextureRect.new()
@@ -33,6 +42,10 @@ func stop_inspect():
 func update_letter_display(letters_dict: Dictionary):
   clear()
 
-  for letter_id in letters_dict:
+  # Reverse to display from right to left in order of insertion (hope this works in gdscript)
+  var letters_ids = letters_dict.keys()
+  letters_ids.invert()
+
+  for letter_id in letters_ids:
     add_letter_to_display(letter_id, letters_dict[letter_id])
 

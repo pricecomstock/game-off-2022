@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/HUD.gd" type="Script" id=4]
 
 [node name="HUD" type="CanvasLayer"]
+layer = 2
 script = ExtResource( 4 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -33,6 +34,7 @@ margin_right = 60.0
 rect_min_size = Vector2( 60, 0 )
 
 [node name="LettersDisplay" parent="MarginContainer/VBoxContainer/TopRowHBox" instance=ExtResource( 3 )]
+pause_mode = 2
 unique_name_in_owner = true
 anchor_right = 0.0
 margin_left = 64.0
@@ -50,6 +52,7 @@ margin_bottom = 276.0
 alignment = 2
 
 [node name="LetterView" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 1 )]
+pause_mode = 2
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0

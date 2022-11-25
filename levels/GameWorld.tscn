@@ -10,6 +10,7 @@
 [ext_resource path="res://levels/chunks/WaterChunk.tscn" type="PackedScene" id=8]
 
 [node name="GameWorld" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 1 )
 test_chunk = ExtResource( 4 )
 water_chunk = ExtResource( 8 )

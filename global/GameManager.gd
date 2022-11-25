@@ -1,11 +1,18 @@
 extends Node
 
 signal game_state_change(new_state, previous_state)
+signal unpaused
+signal paused
 
 var GameWorld = preload("res://levels/GameWorld.tscn")
 var MainMenu = preload("res://ui/MainMenu.tscn")
 var Hud = preload("res://ui/HUD.tscn")
+var PauseMenu = preload("res://ui/PauseMenu.tscn")
+
 var current_game_world
+var current_pause_menu
+
+var is_paused
 
 enum GameState {MENU, IN_GAME}
 
@@ -40,5 +47,42 @@ func change_state(new_state: int) -> void:
       root.get_node("MainMenu").queue_free()
       pass
     GameState.IN_GAME:
-      root.get_node("GameWorld").queue_free()
+      current_game_world.queue_free()
       pass
+
+func _unhandled_input(event: InputEvent):
+  if (event.is_action_pressed("menu")):
+    match current_state:
+      GameState.MENU: # Start Game
+        change_state(GameState.IN_GAME)
+      GameState.IN_GAME: #Pause
+        toggle_pause()
+
+func toggle_pause():
+  if (is_paused):
+    unpause_game()
+  else:
+    pause_game()
+
+func pause_game():
+  is_paused = true
+  get_tree().paused = true
+  emit_signal("paused")
+  current_pause_menu = PauseMenu.instance()
+  get_tree().root.add_child(current_pause_menu)
+  
+  
+func unpause_game():
+  is_paused = false
+  get_tree().paused = false
+  emit_signal("unpaused")
+  current_pause_menu.queue_free()
+
+func temp_pause(seconds: float):
+  var tree = get_tree()
+  var timer = tree.create_timer(seconds)
+  tree.paused = true
+  emit_signal("paused")
+  yield(timer, "timeout")
+  tree.paused = false
+  emit_signal("unpaused")

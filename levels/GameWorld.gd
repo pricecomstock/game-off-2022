@@ -86,10 +86,6 @@ func spawn_extraction():
       extraction.position = extraction_spawn_point.position
       y_sort.add_child(extraction)
       spawned = true
-  
-func _unhandled_input(event: InputEvent):
-  if (event.is_action_pressed("menu")):
-    GameManager.change_state(GameManager.GameState.MENU)
 
 func load_world_chunks():
   var world_chunk_files = Util.get_file_paths_in_directory("res://levels/chunks/random")

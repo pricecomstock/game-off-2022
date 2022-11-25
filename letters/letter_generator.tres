@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource( 1 )
-letter_bodies = [ "Dear Tom, I've enjoyed being neighbors with you and want you to know that I was thinking about you in my dying moments", "Hello, getting shot really hurts", "Ok I'm dead" ]
+letter_bodies = [ "Dear Tom, I've enjoyed being neighbors with you and want you to know that I was thinking about you in my dying moments", "Hello, getting shot really hurts", "Ok I'm dead", "Dearest Wife:I hope this finds you well. I am afraid I have died on the battlefield. Yes, that's right, I'm KIA, just like that stupid car you wanted.For years I dreamed of a nice BMW. Feeling the solid hum of a V6 as I rev the engine up to drive into my dreams.But you couldn't have it that way. You wanted a family car. A Kia fucking Sorento. I hope every time you look at that car, you think of me and my sad fucking stupid little corpse rotting on the plains of Fightland.Regards,Richard" ]
 colors = [ Color( 0.85098, 0.356863, 0.603922, 1 ), Color( 0.741176, 0.317647, 0.352941, 1 ), Color( 0.839216, 0.603922, 0.305882, 1 ), Color( 0.580392, 0.878431, 0.572549, 1 ), Color( 0.133333, 0.388235, 0.419608, 1 ), Color( 0.270588, 0.631373, 0.870588, 1 ), Color( 0.886275, 0.94902, 0.4, 1 ) ]
