@@ -79,10 +79,12 @@ func unpause_game():
   current_pause_menu.queue_free()
 
 func temp_pause(seconds: float):
+  pause_until(get_tree().create_timer(seconds), "timeout")
+
+func pause_until(obj, sig):
   var tree = get_tree()
-  var timer = tree.create_timer(seconds)
   tree.paused = true
   emit_signal("paused")
-  yield(timer, "timeout")
+  yield(obj, sig)
   tree.paused = false
   emit_signal("unpaused")

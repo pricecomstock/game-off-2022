@@ -49,13 +49,13 @@ custom_constants/separation = 4
 margin_top = 20.0
 margin_right = 616.0
 margin_bottom = 276.0
-alignment = 2
+alignment = 1
 
 [node name="LetterView" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 1 )]
 pause_mode = 2
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 360.0
-margin_right = 616.0
+margin_left = 180.0
+margin_right = 436.0
 margin_bottom = 256.0

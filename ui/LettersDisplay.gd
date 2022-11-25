@@ -17,6 +17,7 @@ func clear() -> void:
 func _on_letter_added(letter_id, _letter):
   inspect_letter(letter_id)
 
+  # GameManager.pause_until(self, "inspection_stopped")
   # yikes, assuming paused somewhere but probably ok
   yield(GameManager, "unpaused")
   stop_inspect()
