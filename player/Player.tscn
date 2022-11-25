@@ -121,7 +121,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
-max_health = 3
+max_health = 2
 speed = 110
 friction = 0.12
 projectile_speed = 400.0
