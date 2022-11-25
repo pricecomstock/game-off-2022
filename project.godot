@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "Buff",
+"language": "GDScript",
+"path": "res://letters/effects/Buff.gd"
+}, {
 "base": "Node2D",
 "class": "Chunk",
 "language": "GDScript",
@@ -59,12 +64,18 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://projectiles/Shooter.gd"
 }, {
+"base": "Resource",
+"class": "Stats",
+"language": "GDScript",
+"path": "res://letters/effects/Stats.gd"
+}, {
 "base": "Reference",
 "class": "Util",
 "language": "GDScript",
 "path": "res://util/Util.gd"
 } ]
 _global_script_class_icons={
+"Buff": "",
 "Chunk": "",
 "HitBox": "",
 "House": "",
@@ -75,6 +86,7 @@ _global_script_class_icons={
 "PlayerSpawnPoint": "",
 "SharedInt": "",
 "Shooter": "",
+"Stats": "",
 "Util": ""
 }
 
@@ -86,7 +98,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GlobalStats="*res://letters/GlobalStats.gd"
+GlobalStats="*res://letters/effects/GlobalStats.gd"
 SpawnManager="*res://enemies/SpawnManager.tscn"
 GlobalPlayerInfo="*res://player/GlobalPlayerInfo.gd"
 Events="*res://global/Events.tscn"
