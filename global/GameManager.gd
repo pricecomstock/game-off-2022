@@ -3,6 +3,7 @@ extends Node
 signal game_state_change(new_state, previous_state)
 signal unpaused
 signal paused
+signal world_generated
 
 var GameWorld = preload("res://levels/GameWorld.tscn")
 var MainMenu = preload("res://ui/MainMenu.tscn")
@@ -38,8 +39,7 @@ func change_state(new_state: int) -> void:
       root.add_child(current_game_world)
       
       current_game_world.generate()
-
-      
+      emit_signal("world_generated")
 
   # cleanup previous state
   match previous_state:
