@@ -4,7 +4,7 @@ signal letter_inspected
 signal inspection_stopped
 
 export var separation := 4
-export(Texture) var letter_icon
+export(PackedScene) var letter_icon_scene
 
 func _ready():
   LetterManager.connect("letters_updated", self, "update_letter_display")
@@ -24,15 +24,13 @@ func _on_letter_added(letter_id, _letter):
 
 
 func add_letter_to_display(letter_id: int, letter: Letter) -> void:
-  var new_node := TextureRect.new()
-  new_node.texture = letter_icon
-  new_node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT;
-  new_node.rect_min_size = Vector2(self.rect_size.y, self.rect_size.y)
+  var new_node = letter_icon_scene.instance()
+  self.add_child(new_node)
+  new_node.display_letter(letter)
 
   new_node.connect("mouse_entered", self, "inspect_letter", [letter_id])
   new_node.connect("mouse_exited", self, "stop_inspect")
 
-  self.add_child(new_node)
 
 func inspect_letter(id):
   emit_signal("letter_inspected", id)

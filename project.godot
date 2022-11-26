@@ -50,6 +50,11 @@ _global_script_classes=[ {
 "path": "res://letters/LetterGenerator.gd"
 }, {
 "base": "Control",
+"class": "LetterSeal",
+"language": "GDScript",
+"path": "res://LetterSeal.gd"
+}, {
+"base": "Control",
 "class": "LetterView",
 "language": "GDScript",
 "path": "res://LetterView.gd"
@@ -88,6 +93,7 @@ _global_script_class_icons={
 "HurtBox": "",
 "Letter": "",
 "LetterGenerator": "",
+"LetterSeal": "",
 "LetterView": "",
 "PlayerSpawnPoint": "",
 "SharedInt": "",

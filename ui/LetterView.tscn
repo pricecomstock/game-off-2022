@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://art/oc/envelopes/letter.png" type="Texture" id=1]
 [ext_resource path="res://LetterView.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://art/fonts/monogram16spread.tres" type="DynamicFont" id=4]
 [ext_resource path="res://ui/letter_theme.tres" type="Theme" id=5]
 [ext_resource path="res://ui/BuffText.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/LetterSeal.tscn" type="PackedScene" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -127,3 +128,11 @@ anchor_bottom = 0.0
 margin_top = 17.0
 margin_right = 220.0
 margin_bottom = 33.0
+
+[node name="LetterSeal" parent="." instance=ExtResource( 7 )]
+unique_name_in_owner = true
+margin_left = 196.0
+margin_top = 116.0
+margin_right = -36.0
+margin_bottom = -116.0
+rect_scale = Vector2( 1.5, 1.5 )

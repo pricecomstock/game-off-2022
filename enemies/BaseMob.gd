@@ -39,5 +39,4 @@ func kill() -> void:
   queue_free()
 
 func _on_player_death(location: Vector2) -> void:
-  print("Reacting to player death")
   kill()
