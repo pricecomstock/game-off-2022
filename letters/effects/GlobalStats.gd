@@ -14,7 +14,7 @@ func get_base_stats() -> Dictionary:
 
 func _ready():
   reset()
-  print(current_stats)
+  
 
 func reset():
   current_stats = get_base_stats()
