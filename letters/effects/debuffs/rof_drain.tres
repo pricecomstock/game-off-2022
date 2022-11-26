@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://letters/effects/Buff.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+flavor_name = "Crying Gun"
+is_debuff = true
+attribute = 1
+mod_mode = 4
+amount = 30.0

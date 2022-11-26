@@ -20,6 +20,6 @@ const starting_values = {
 }
 
 const attribute_names = {
-	ATTRIBUTES.PLAYER_SPEED_MULTIPLIER: "Player Speed",
+	ATTRIBUTES.PLAYER_SPEED_MULTIPLIER: "Move Speed",
 	ATTRIBUTES.RATE_OF_FIRE_MULTIPLIER: "Rate of Fire"
 }

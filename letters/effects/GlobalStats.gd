@@ -14,10 +14,16 @@ func get_base_stats() -> Dictionary:
 
 func _ready():
   reset()
-  
+  LetterManager.connect("letters_updated", self, "recalculate_buffs")
 
 func reset():
   current_stats = get_base_stats()
+
+func recalculate_buffs(letters_dict: Dictionary):
+  reset()
+  for letter in LetterManager.get_letters().values():
+    for buff in letter.buffs:
+      apply_buff(buff)
 
 func apply_buff(buff: Buff):
   var current_value = current_stats[buff.attribute]
@@ -36,3 +42,6 @@ func apply_buff(buff: Buff):
 # Take 
 func get_stat(attribute):
   return current_stats[attribute]
+
+func _on_letters_updated(letters_dict: Dictionary):
+  recalculate_buffs(letters_dict)

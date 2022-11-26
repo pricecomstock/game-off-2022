@@ -23,7 +23,6 @@ func _on_player_health_change(new_value: int):
   update_healthbar()
 
 func update_healthbar():
-  print("progress", progress)
   progress.set_max(max_health)
   progress.set_value(current_health)
   label.text = format_string % [max(current_health, 0), max_health]

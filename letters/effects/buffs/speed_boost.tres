@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://letters/effects/Buff.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+flavor_name = "Go Fast"
+is_debuff = false
+attribute = 0
+mod_mode = 3
+amount = 30.0

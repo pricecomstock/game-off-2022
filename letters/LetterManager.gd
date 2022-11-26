@@ -27,6 +27,7 @@ func add_letter(letter: Letter):
 
   letter.id = letter_id
   letters_dict[letter_id] = letter
+
   emit_signal("letters_updated", letters_dict)
   emit_signal("letter_added", letter_id, letter)
   
@@ -36,7 +37,6 @@ func add_letter(letter: Letter):
       
 
 func add_random_letter():
-  print("letter_generator", letter_generator)
   var letter = letter_generator.generate_letter()
   add_letter(letter)
 

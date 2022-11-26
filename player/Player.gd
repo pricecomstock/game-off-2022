@@ -128,8 +128,6 @@ func kill() -> void:
   controls_enabled = false
   Events.emit_signal("player_death", self.global_position)
 
-  print("dying")
-
   # TODO figure out how to use animation_state here
   # animation_state.travel("Death")
   # yield(animation_tree, "animation_finished")

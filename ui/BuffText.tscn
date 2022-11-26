@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://art/fonts/monogram.tres" type="DynamicFont" id=1]
+[ext_resource path="res://art/oc/ui/buff-icon.png" type="Texture" id=2]
+[ext_resource path="res://ui/BuffText.gd" type="Script" id=3]
+[ext_resource path="res://art/oc/ui/debuff-icon.png" type="Texture" id=4]
+
+[node name="BuffText" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 16 )
+script = ExtResource( 3 )
+buff_texture = ExtResource( 2 )
+debuff_texture = ExtResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 152.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+margin_left = 20.0
+margin_right = 20.0
+margin_bottom = 16.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 24.0
+margin_top = 1.0
+margin_right = 152.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.137255, 0.129412, 0.239216, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "+30% stat"
+valign = 1
