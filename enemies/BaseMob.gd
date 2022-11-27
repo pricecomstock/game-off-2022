@@ -35,6 +35,7 @@ func take_knockback(amount, from_location: Vector2):
   velocity += direction * amount
 
 func kill() -> void:
+  Events.emit_signal("enemy_killed")
   get_parent().remove_child(self)
   queue_free()
 

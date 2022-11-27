@@ -7,4 +7,4 @@ func _ready():
 
 func _on_PlayerDetector_area_entered(_area: Area2D):
   Events.emit_signal("player_extraction")
-  print("Extraction!")
+  print("Extraction!")                                                                                                                                 

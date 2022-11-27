@@ -11,5 +11,7 @@ signal player_shoot
 signal player_health_change(amount)
 signal player_max_health_change(amount)
 
+signal enemy_killed
+
 func _ready():
   pass

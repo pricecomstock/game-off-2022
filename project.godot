@@ -118,6 +118,7 @@ GameManager="*res://global/GameManager.tscn"
 DialogueManager="*res://dialogue/DialogueManager.tscn"
 CameraManager="*res://ui/camera/CameraManager.gd"
 LetterManager="*res://letters/LetterManager.tscn"
+RunFacts="*res://global/RunFacts.tscn"
 
 [display]
 
