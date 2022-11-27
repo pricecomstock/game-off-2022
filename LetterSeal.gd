@@ -22,7 +22,6 @@ func set_symbol(index: int):
     symbol_size
   ))
   symbol.set_texture(cropped_texture)
-  print("symbol", symbol.texture, symbol.texture.region)
 
 func set_color(color: Color):
   modulate = color

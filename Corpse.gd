@@ -7,7 +7,6 @@ onready var remote_transform: RemoteTransform2D = $RemoteTransform2D
 onready var speech_bubble = $SpeechBubble
 
 func _ready():
-  print(remote_transform)
   speech_bubble.hide()
 
   get_tree().create_timer(talk_delay).connect("timeout", self, "talk")
