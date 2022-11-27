@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/MiniMap.gd" type="Script" id=1]
 [ext_resource path="res://tmp/worldmap.png" type="Texture" id=2]
+[ext_resource path="res://ui/LetterSeal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://art/oc/player_minimap_icon.png" type="Texture" id=4]
+[ext_resource path="res://art/oc/extraction_minimap_icon.png" type="Texture" id=5]
 
 [node name="MiniMap" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+letter_seal_scene = ExtResource( 3 )
+seal_scale = 0.5
 
 [node name="MapTextureRect" type="TextureRect" parent="."]
 unique_name_in_owner = true
@@ -16,3 +21,43 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 2 )
 stretch_mode = 5
+
+[node name="Icons" type="Control" parent="."]
+unique_name_in_owner = true
+margin_right = 128.0
+margin_bottom = 128.0
+
+[node name="ExtractionIcon" type="Control" parent="Icons"]
+unique_name_in_owner = true
+margin_left = 81.0
+margin_top = 58.0
+margin_right = 97.0
+margin_bottom = 74.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="TextureRect" type="TextureRect" parent="Icons/ExtractionIcon"]
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 5 )
+
+[node name="LetterSeals" type="Control" parent="Icons"]
+unique_name_in_owner = true
+margin_right = 128.0
+margin_bottom = 128.0
+
+[node name="PlayerIcon" type="Control" parent="Icons"]
+unique_name_in_owner = true
+margin_left = 21.0
+margin_top = 45.0
+margin_right = 37.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="PlayerIconImage" type="TextureRect" parent="Icons/PlayerIcon"]
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 4 )

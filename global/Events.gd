@@ -4,6 +4,7 @@ extends Node
 signal player_extraction
 signal player_death(location)
 signal player_respawned(location)
+signal recipients_updated
 
 # Details
 signal player_shoot

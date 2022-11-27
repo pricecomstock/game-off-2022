@@ -25,3 +25,7 @@ func set_symbol(index: int):
 
 func set_color(color: Color):
   modulate = color
+
+func set_for_letter(letter: Letter):
+  set_color(letter.color)
+  set_symbol(letter.symbol)

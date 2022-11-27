@@ -1,5 +1,5 @@
 extends Resource
-class_name Buff
+class_name Buff,"res://art/oc/ui/buff-icon.png"
 
 export(String) var flavor_name := ""
 export(bool) var is_debuff := false

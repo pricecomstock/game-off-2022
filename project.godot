@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "LetterSeal",
 "language": "GDScript",
-"path": "res://LetterSeal.gd"
+"path": "res://ui/LetterSeal.gd"
 }, {
 "base": "Control",
 "class": "LetterView",
@@ -85,7 +85,7 @@ _global_script_classes=[ {
 "path": "res://util/Util.gd"
 } ]
 _global_script_class_icons={
-"Buff": "",
+"Buff": "res://art/oc/ui/buff-icon.png",
 "BuffPicker": "",
 "Chunk": "",
 "HitBox": "",
