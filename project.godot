@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://levels/Chunk.gd"
 }, {
+"base": "Node2D",
+"class": "GameWorld",
+"language": "GDScript",
+"path": "res://levels/GameWorld.gd"
+}, {
 "base": "Area2D",
 "class": "HitBox",
 "language": "GDScript",
@@ -88,6 +93,7 @@ _global_script_class_icons={
 "Buff": "res://art/oc/ui/buff-icon.png",
 "BuffPicker": "",
 "Chunk": "",
+"GameWorld": "",
 "HitBox": "",
 "House": "",
 "HurtBox": "",

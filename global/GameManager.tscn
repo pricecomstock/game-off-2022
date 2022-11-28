@@ -1,7 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://global/GameManager.gd" type="Script" id=1]
+[ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/MainMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://levels/GameWorld.tscn" type="PackedScene" id=5]
 
 [node name="GameManager" type="Node"]
 pause_mode = 2
 script = ExtResource( 1 )
+game_world = ExtResource( 5 )
+main_menu = ExtResource( 4 )
+hud_scene = ExtResource( 2 )
+pause_menu = ExtResource( 3 )

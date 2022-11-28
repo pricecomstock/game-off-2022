@@ -1,5 +1,5 @@
 extends Node2D
-# class_name GameWorld
+class_name GameWorld
 
 export(PackedScene) var test_chunk
 export(PackedScene) var water_chunk

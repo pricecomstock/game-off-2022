@@ -5,10 +5,10 @@ signal unpaused
 signal paused
 signal world_generated
 
-var GameWorld = preload("res://levels/GameWorld.tscn")
-var MainMenu = preload("res://ui/MainMenu.tscn")
-var Hud = preload("res://ui/HUD.tscn")
-var PauseMenu = preload("res://ui/PauseMenu.tscn")
+export(PackedScene) var game_world
+export(PackedScene) var main_menu
+export(PackedScene) var hud_scene
+export(PackedScene) var pause_menu
 
 var current_game_world
 var current_pause_menu
@@ -32,10 +32,10 @@ func change_state(new_state: int) -> void:
   # set up new state
   match current_state:
     GameState.MENU:
-      root.add_child(MainMenu.instance())
+      root.add_child(main_menu.instance())
     GameState.IN_GAME:
-      current_game_world = GameWorld.instance()
-      root.add_child(Hud.instance())
+      current_game_world = game_world.instance()
+      root.add_child(hud_scene.instance())
       root.add_child(current_game_world)
       
       current_game_world.generate()
@@ -68,7 +68,7 @@ func pause_game():
   is_paused = true
   get_tree().paused = true
   emit_signal("paused")
-  current_pause_menu = PauseMenu.instance()
+  current_pause_menu = pause_menu.instance()
   get_tree().root.add_child(current_pause_menu)
   
   
