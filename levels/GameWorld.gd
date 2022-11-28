@@ -34,8 +34,6 @@ func generate():
   assemble_random_chunks()
 
   var err = world_image.save_png("res://tmp/worldmap.png")
-  print("err ", err)
-  
   
   spawn_initial_player()
   spawn_extraction()
@@ -135,3 +133,4 @@ func _on_letter_added(letter_id, _letter):
       
   var spawn_house = houses[randi() % houses.size()] as House
   spawn_house.spawn_recipient(letter_id)
+

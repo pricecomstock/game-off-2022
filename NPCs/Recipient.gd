@@ -11,17 +11,16 @@ func _ready():
   seal.set_symbol(letter.symbol)
   seal.set_color(letter.color)
 
-  print("i am a recipient and here")
   Events.emit_signal("recipients_updated")
 
 func attempt_letter_delivery():
-  print("delivery!")
   var is_deliverable = LetterManager.has_letter(letter_id)
   if (is_deliverable):
     execute_delivery()
 
 func execute_delivery():
   # TODO add animation or speech bubble or something
+  print("delivery!")
   LetterManager.deliver_letter(letter_id)
   remove_from_group("recipients")
   Events.emit_signal("recipients_updated")

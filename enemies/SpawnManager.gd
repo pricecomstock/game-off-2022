@@ -30,7 +30,7 @@ func run_spawn_cycle() -> void:
     return
 
   var enemies_to_spawn : int = min(target_enemy_count - enemy_count, max_simul_spawns)
-  print("spawn cycle, spawning ", enemies_to_spawn, " enemies (", enemy_count + enemies_to_spawn, "/", target_enemy_count, ")")
+  # print("spawn cycle, spawning ", enemies_to_spawn, " enemies (", enemy_count + enemies_to_spawn, "/", target_enemy_count, ")")
 
   if (enemies_to_spawn <= 0): 
     return

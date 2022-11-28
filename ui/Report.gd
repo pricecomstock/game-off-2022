@@ -10,7 +10,5 @@ func _ready():
 
 func update_text():
   var run_facts = RunFacts.dict()
-  print("template", template)
-  print("run facts", run_facts)
 
   report_text.text = template.format(run_facts)

@@ -11,11 +11,12 @@ export(PackedScene) var hud_scene
 export(PackedScene) var pause_menu
 
 var current_game_world
+var current_hud
 var current_pause_menu
 
 var is_paused
 
-enum GameState {MENU, IN_GAME}
+enum GameState {MENU, IN_GAME, DEBRIEF}
 
 var current_state = GameState.MENU
 
@@ -32,14 +33,23 @@ func change_state(new_state: int) -> void:
   # set up new state
   match current_state:
     GameState.MENU:
+      if is_instance_valid(current_game_world):
+        current_game_world.queue_free()
+      if is_instance_valid(current_hud):
+        current_hud.queue_free()
       root.add_child(main_menu.instance())
+
     GameState.IN_GAME:
       current_game_world = game_world.instance()
-      root.add_child(hud_scene.instance())
+      current_hud = hud_scene.instance()
+      root.add_child(current_hud)
       root.add_child(current_game_world)
       
       current_game_world.generate()
       emit_signal("world_generated")
+
+    GameState.DEBRIEF:
+      pause_game()
 
   # cleanup previous state
   match previous_state:
@@ -47,16 +57,20 @@ func change_state(new_state: int) -> void:
       root.get_node("MainMenu").queue_free()
       pass
     GameState.IN_GAME:
-      current_game_world.queue_free()
       pass
+    GameState.DEBRIEF:
+      unpause_game()
+
 
 func _unhandled_input(event: InputEvent):
   if (event.is_action_pressed("menu")):
     match current_state:
       GameState.MENU: # Start Game
         change_state(GameState.IN_GAME)
-      GameState.IN_GAME: #Pause
+      GameState.IN_GAME: # Pause
         toggle_pause()
+      GameState.DEBRIEF: # Go to menu
+        change_state(GameState.MENU)
 
 func toggle_pause():
   if (is_paused):

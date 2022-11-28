@@ -14,7 +14,7 @@ template = "Combat Report:
 
 Time: {time}
 
-Letters Delivered: {time}
+Letters Delivered: {deliveries}
 
 Enemy Combatants Killed: {kills}
 Casualties: {deaths}"

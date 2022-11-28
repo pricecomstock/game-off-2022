@@ -20,15 +20,16 @@ func _ready():
   reset()
   Events.connect("enemy_killed", self, "_on_enemy_killed")
   Events.connect("player_death", self, "_on_player_death")
-  LetterManager.connect("letter_delivered", self, "_on_letter_delivered")
+  Events.connect("letter_delivered", self, "_on_letter_delivered")
 
 func _on_enemy_killed():
   kills += 1
 
-func _on_player_death():
+func _on_player_death(_location):
   deaths += 1
 
 func _on_letter_delivered():
+  print("got letter delivered message")
   deliveries += 1
 
 func dict() -> Dictionary:
@@ -36,4 +37,6 @@ func dict() -> Dictionary:
     "time": current_time(),
 
     "kills": kills,
+    "deaths": deaths,
+    "deliveries": deliveries
   }

@@ -31,8 +31,6 @@ func _on_recipients_updated():
   for recipient in recipients:
     recipients_locations_by_letter_id[recipient.letter_id] = GameManager.current_game_world.global_position_to_no_border_tile_position(recipient.global_position)
   
-  print(recipients_locations_by_letter_id)
-  
   for letter_id in letters:
     var seal = letter_seal_scene.instance()
     letter_seals.add_child(seal)
