@@ -15,7 +15,6 @@ onready var y_sort : YSort = $YSort
 onready var tile_map_ground : TileMap = $TileMapGround
 onready var tile_map_world : TileMap = $YSort/TileMapWorld
 onready var camera : Camera2D = $Camera2D
-onready var navigation : AStarPath = $Navigation
 
 var extraction_tile_position = Vector2.ZERO
 var random_chunks = []
@@ -39,7 +38,7 @@ func generate():
   spawn_initial_player()
   spawn_extraction()
 
-  navigation.initialize()
+  GridNavigation.initialize(tile_map_ground, [1])
 
 # This is basically for minimap. Returns the tile position, not counting the world borders
 func global_position_to_no_border_tile_position(position: Vector2) -> Vector2:

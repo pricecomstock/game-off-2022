@@ -9,6 +9,9 @@ onready var movement_timer : Timer = $MovementTimer
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var velocity = Vector2.ZERO
 
+var path : PoolVector2Array = []
+var path_current_destination_inddex := 0
+
 export var health := 1
 
 func _ready():
@@ -42,9 +45,11 @@ func kill() -> void:
 func _on_player_death(location: Vector2) -> void:
   kill()
 
+func get_distance_to_player():
+  return global_position.distance_to(GlobalPlayerInfo.player_global_position())
+
 func navigate_to_player():
   var player_tile_position = GlobalPlayerInfo.player_tile_position()
   var mob_tile_position = GameManager.current_game_world.tile_map_ground.world_to_map(global_position)
-  # TODO YIKES FIX
-  var path = GameManager.current_game_world.navigation._calculate_path(mob_tile_position, player_tile_position)
-  print(path)
+  path = GridNavigation._calculate_path(mob_tile_position, player_tile_position)
+  
