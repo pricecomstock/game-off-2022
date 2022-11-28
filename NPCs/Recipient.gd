@@ -25,6 +25,7 @@ func execute_delivery():
   LetterManager.deliver_letter(letter_id)
   remove_from_group("recipients")
   Events.emit_signal("recipients_updated")
+  Events.emit_signal("letter_delivered")
   queue_free()
 
 func _on_DeliveryDetector_area_entered(area:Area2D):

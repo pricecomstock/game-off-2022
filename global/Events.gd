@@ -5,6 +5,7 @@ signal player_extraction
 signal player_death(location)
 signal player_respawned(location)
 signal recipients_updated
+signal letter_delivered
 
 # Details
 signal player_shoot
