@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "AStarPath",
+"language": "GDScript",
+"path": "res://pathfinding/AStar_Path.gd"
+}, {
 "base": "Resource",
 "class": "Buff",
 "language": "GDScript",
@@ -90,6 +95,7 @@ _global_script_classes=[ {
 "path": "res://util/Util.gd"
 } ]
 _global_script_class_icons={
+"AStarPath": "",
 "Buff": "res://art/oc/ui/buff-icon.png",
 "BuffPicker": "",
 "Chunk": "",

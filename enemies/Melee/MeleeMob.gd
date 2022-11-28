@@ -23,6 +23,7 @@ func _on_done_moving():
   set_movement()
 
 func set_movement():
+  navigate_to_player()
   var move_time = rand_range(min_move_time, max_move_time)
   var player_position = GlobalPlayerInfo.player_global_position()
 

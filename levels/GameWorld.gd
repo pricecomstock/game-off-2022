@@ -15,6 +15,7 @@ onready var y_sort : YSort = $YSort
 onready var tile_map_ground : TileMap = $TileMapGround
 onready var tile_map_world : TileMap = $YSort/TileMapWorld
 onready var camera : Camera2D = $Camera2D
+onready var navigation : AStarPath = $Navigation
 
 var extraction_tile_position = Vector2.ZERO
 var random_chunks = []
@@ -37,6 +38,8 @@ func generate():
   
   spawn_initial_player()
   spawn_extraction()
+
+  navigation.initialize()
 
 # This is basically for minimap. Returns the tile position, not counting the world borders
 func global_position_to_no_border_tile_position(position: Vector2) -> Vector2:
@@ -61,7 +64,8 @@ func assemble_random_chunks():
 
       Util.merge_tile_map(tile_map_ground, chunk_tile_map_ground, chunk_size, chunk_tile_offset)
       Util.merge_tile_map(tile_map_world, chunk_tile_map_world, chunk_size, chunk_tile_offset)
-      write_tile_map_to_world_image(chunk_tile_map_ground, chunk_tile_offset - chunk_size) #subtract chunk size because border
+      if !is_border_chunk:
+        write_tile_map_to_world_image(chunk_tile_map_ground, chunk_tile_offset - chunk_size) #subtract chunk size because border
 
       move_children_to_new_parent(chunk_y_sort, y_sort, chunk_world_pixel_offset)
 

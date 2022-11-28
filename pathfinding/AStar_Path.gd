@@ -1,15 +1,33 @@
 # based off https://www.youtube.com/watch?v=dVNH6mIDksQ
-extends TileMap
+extends Node
 class_name AStarPath
 
-onready var astar : AStar2D = AStar2D.new()
-onready var used_cells := get_used_cells()
+export(NodePath) var tile_map_ground_path : String = ""
+export(Array, int) var ground_navigable_cell_indices := []
+onready var tile_map_ground : TileMap = get_node(tile_map_ground_path)
 
+onready var astar : AStar2D = AStar2D.new()
+
+var used_cells := {}
 var path : PoolVector2Array
 
-func _ready():
+func ready():
+  pass
+
+func reset():
+  astar = AStar2D.new()
+
+func initialize():
+  reset()
+  _load_tilemap_cells()
   _add_points()
   _connect_points()
+
+func _load_tilemap_cells():
+  for index in ground_navigable_cell_indices:
+    var tiles = tile_map_ground.get_used_cells_by_id(index)
+    for tile in tiles:
+      used_cells[tile] = 0
 
 func _add_points():
   for cell in used_cells:
@@ -24,9 +42,10 @@ func _connect_points():
       if used_cells.has(next_cell): # TODO convert to dict to optimize
         astar.connect_points(id(cell), id(next_cell), false)
 
-func _get_path():
-  path = astar.get_point_path()
+func _calculate_path(start, end):
+  path = astar.get_point_path(id(start), id(end))
   path.remove(0)
+  return path
 
 # a contor pairing function
 func id(point: Vector2):

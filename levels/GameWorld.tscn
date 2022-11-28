@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://levels/GameWorld.gd" type="Script" id=1]
 [ext_resource path="res://ui/camera/Camera.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://NPCs/Extraction.tscn" type="PackedScene" id=7]
 [ext_resource path="res://levels/chunks/WaterChunk.tscn" type="PackedScene" id=8]
+[ext_resource path="res://pathfinding/Navigation.tscn" type="PackedScene" id=9]
 
 [node name="GameWorld" type="Node2D"]
 pause_mode = 1
@@ -32,3 +33,7 @@ cell_size = Vector2( 16, 16 )
 format = 1
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
+
+[node name="Navigation" parent="." instance=ExtResource( 9 )]
+tile_map_ground_path = NodePath("../TileMapGround")
+ground_navigable_cell_indices = [ 1 ]

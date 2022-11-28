@@ -41,3 +41,10 @@ func kill() -> void:
 
 func _on_player_death(location: Vector2) -> void:
   kill()
+
+func navigate_to_player():
+  var player_tile_position = GlobalPlayerInfo.player_tile_position()
+  var mob_tile_position = GameManager.current_game_world.tile_map_ground.world_to_map(global_position)
+  # TODO YIKES FIX
+  var path = GameManager.current_game_world.navigation._calculate_path(mob_tile_position, player_tile_position)
+  print(path)
