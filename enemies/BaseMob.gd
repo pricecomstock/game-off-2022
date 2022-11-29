@@ -3,14 +3,34 @@ extends KinematicBody2D
 signal health_change
 signal health_zero
 
+export var speed := 100
+# The distance at which a path destination is considered reached and we move onto the next one
+export var path_destination_threshold := 4.0
+
+export var visualize_path := false
+
+# The distance at which the player is considered nearby and we no longer need to pathfind
+export var player_nearby_threshold := 100.0
+export var player_nearby_check_seconds := 2.1
+
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var movement_timer : Timer = $MovementTimer
+onready var player_line_of_walk_detector : RayCast2D = get_node("%PlayerLineOfWalkDetector")
+
+var path_visualization : Line2D
+var has_los_to_player = false
+
+enum MovementState { PLAYER_NEARBY, NAVIGATING_TO_PLAYER }
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var velocity = Vector2.ZERO
+var current_move_state = MovementState.PLAYER_NEARBY
+var determine_move_mode_timer : Timer
+
 
 var path : PoolVector2Array = []
-var path_current_destination_inddex := 0
+var path_current_destination_index := 0
+var path_current_travel_direction := Vector2.ZERO
 
 export var health := 1
 
@@ -18,10 +38,51 @@ func _ready():
   rng.randomize()
   add_to_group("enemies")
   Events.connect("player_death", self, "_on_player_death")
+  
+  determine_move_mode_timer = Timer.new()
+  add_child(determine_move_mode_timer)
+  determine_move_mode_timer.set_one_shot(false)
+  determine_move_mode_timer.wait_time = player_nearby_check_seconds
+  determine_move_mode_timer.connect("timeout", self, "determine_move_mode")
+  determine_move_mode_timer.start()
+
+  path_visualization = Line2D.new()
+
+  determine_move_mode()
 
 func _physics_process(delta):
+  los_check()
+  calculate_movement()
   move_and_slide(velocity)
-  
+
+func los_check():
+  var player_offset = GlobalPlayerInfo.player_global_position() - global_position
+  player_line_of_walk_detector.cast_to = player_offset
+  player_line_of_walk_detector.force_raycast_update()
+  has_los_to_player = !player_line_of_walk_detector.is_colliding()
+
+func calculate_movement():
+  match current_move_state:
+    MovementState.PLAYER_NEARBY:
+      player_nearby_movement()
+    MovementState.NAVIGATING_TO_PLAYER:
+      set_velocity_towards_next_nav_waypoint()
+
+func player_nearby_movement():
+  velocity = get_direction_to_player() * speed
+
+func determine_move_mode():
+  # var previous_move_state = current_move_state
+  if get_distance_to_player() < player_nearby_threshold && has_los_to_player:
+    current_move_state = MovementState.PLAYER_NEARBY
+    print("player is nearby")
+  else:
+    current_move_state = MovementState.NAVIGATING_TO_PLAYER
+    print("pathing to player")
+    calculate_path_to_player()
+    # maybe only do this if changing from other state?
+      
+
 func take_damage(amount: int) -> void:
   animation_player.play('hit')
 
@@ -45,11 +106,50 @@ func kill() -> void:
 func _on_player_death(location: Vector2) -> void:
   kill()
 
-func get_distance_to_player():
+func get_distance_to_player() -> float:
   return global_position.distance_to(GlobalPlayerInfo.player_global_position())
 
-func navigate_to_player():
+func get_direction_to_player() -> Vector2:
+  return global_position.direction_to(GlobalPlayerInfo.player_global_position())
+
+func get_tile_position() -> Vector2:
+  return GameManager.current_game_world.tile_map_ground.world_to_map(global_position) 
+
+func calculate_path_to_player():
   var player_tile_position = GlobalPlayerInfo.player_tile_position()
-  var mob_tile_position = GameManager.current_game_world.tile_map_ground.world_to_map(global_position)
+  var mob_tile_position = get_tile_position()
+  path_current_destination_index = 0
   path = GridNavigation._calculate_path(mob_tile_position, player_tile_position)
+  print("path from %s to %s of size %s" % [mob_tile_position, player_tile_position, path.size()])
+  if visualize_path:
+    path_visualization.width = 2
+    path_visualization.default_color = Color.red
+    path_visualization.points = path
+    
+
+func set_velocity_towards_next_nav_waypoint():
+  # TODO maybe skip ahead until there isn't LOS? might be hard
+  if (path.size() == 0):
+    print("no valid path")
+    return
+    
+  if (path_current_destination_index >= path.size()):
+    print("past end of path")
+    current_move_state = MovementState.PLAYER_NEARBY
+    return
   
+  var path_current_destination : Vector2 = path[path_current_destination_index]
+  var path_current_destination_world : Vector2 = GameManager.current_game_world.tile_pos_to_world(path_current_destination)
+
+  # Reached destination, set to next tile
+  if (global_position.distance_to(path_current_destination_world) < path_destination_threshold):
+    path_current_destination_index += 1
+
+    if (path_current_destination_index >= path.size()):
+      return
+    else:
+      path_current_destination = path[path_current_destination_index]
+
+  path_current_destination_world = GameManager.current_game_world.tile_pos_to_world(path_current_destination)
+  path_current_travel_direction = global_position.direction_to(path_current_destination_world)
+  velocity = speed * path_current_travel_direction

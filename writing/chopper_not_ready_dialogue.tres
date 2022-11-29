@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://writing/RandomStringPool.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+string_choices = [ "What do I look like, the USPS? You gotta deliver that mail first, kid.", "No way, Jose! We can't exfil until you get those letters where they're goin'!", "Don't you DARE think about bringing mail on this chopper! That's bad luck!", "You turn right around buster, I can see those envelopes in your pocket.", "Oh no! Something's wrong with the engine! Go deliver something until we fix it.", "We can't take off until you fulfill an unkept promise you made to a dying soul!", "We'll be too heavy to liftoff with all those letters in your pockets!", "I got a pretty strong paper allergy, so ditch those envelopes before entering.", "" ]
+copy_import_string_to_choices = false
+import_string = ""

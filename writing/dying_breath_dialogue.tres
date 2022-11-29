@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://writing/RandomStringPool.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+string_choices = PoolStringArray( "ughh get this to my loved ones, would ya\?", "I was so young! Live on for me. Live on by mailing this.", "As I lay dying, my final request is sending this letter.", "Oof, that\'s all she wrote... but not all I wrote here!", "It\'s dangerous to go alone! Take this (to my family).", "It\'s too late for me... but not too late for this letter.", "Listen, cough listen to me, cough you gotta deliver this...", "Please... deliver this.......", "Get this to my family, you can guess where they live.", "This letter! It must make it home!", "erk Do NOT read this ergkh it\'s private...", "Give this to my family.", "Promise me one thing... you\'ll mail this for me.", "Please... my generic spouse needs to read this, whoever they\'re generated as.", "Well crap, I never got to mail this very important letter!", "I\'m so sorry...", "Please, you have to send this! No, I don\'t have stamps.", "Ugh, its so hard to talk... Good thing I wrote down my last words.", "" )
+copy_import_string_to_choices = false
+import_string = ""

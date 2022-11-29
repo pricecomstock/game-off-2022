@@ -68,7 +68,7 @@ tracks/1/keys = {
 
 [node name="Mob" type="KinematicBody2D"]
 collision_layer = 8
-collision_mask = 17
+collision_mask = 273
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -92,3 +92,8 @@ anims/RESET = SubResource( 3 )
 anims/hit = SubResource( 4 )
 
 [node name="MovementTimer" type="Timer" parent="."]
+
+[node name="PlayerLineOfWalkDetector" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+enabled = true
+collision_mask = 256

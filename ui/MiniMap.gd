@@ -14,13 +14,13 @@ func _ready():
   Events.connect("recipients_updated", self, "_on_recipients_updated")
 
 func _process(delta):
-  player_icon.rect_position = GlobalPlayerInfo.player_tile_position()
+  player_icon.rect_position = GlobalPlayerInfo.player_minimap_position()
 
 func _on_world_generated():
   var map_texture : ImageTexture = ImageTexture.new()
   map_texture.create_from_image(GameManager.current_game_world.world_image, Image.FORMAT_RGBA8)
   map_texture_rect.texture = map_texture
-  extraction_icon.rect_position = GameManager.current_game_world.extraction_tile_position
+  extraction_icon.rect_position = GameManager.current_game_world.extraction_tile_minimap_position
 
 func _on_recipients_updated():
   Util.remove_all_children(letter_seals)
@@ -29,7 +29,7 @@ func _on_recipients_updated():
   var recipients = get_tree().get_nodes_in_group("recipients")
   var recipients_locations_by_letter_id = {}
   for recipient in recipients:
-    recipients_locations_by_letter_id[recipient.letter_id] = GameManager.current_game_world.global_position_to_no_border_tile_position(recipient.global_position)
+    recipients_locations_by_letter_id[recipient.letter_id] = GameManager.current_game_world.world_pos_to_minimap(recipient.global_position)
   
   for letter_id in letters:
     var seal = letter_seal_scene.instance()

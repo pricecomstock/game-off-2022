@@ -9,6 +9,7 @@ export(PackedScene) var extraction_scene
 export(float) var minimum_extraction_distance = 512.0
 
 export var chunk_size = Vector2(16, 16)
+export var tile_size = Vector2(16, 16)
 export var world_size = Vector2(4,4)
 
 onready var y_sort : YSort = $YSort
@@ -16,7 +17,7 @@ onready var tile_map_ground : TileMap = $TileMapGround
 onready var tile_map_world : TileMap = $YSort/TileMapWorld
 onready var camera : Camera2D = $Camera2D
 
-var extraction_tile_position = Vector2.ZERO
+var extraction_tile_minimap_position = Vector2.ZERO
 var random_chunks = []
 var original_player_spawn_position : Vector2 = Vector2.ZERO
 var world_image : Image
@@ -41,8 +42,14 @@ func generate():
   GridNavigation.initialize(tile_map_ground, [1])
 
 # This is basically for minimap. Returns the tile position, not counting the world borders
-func global_position_to_no_border_tile_position(position: Vector2) -> Vector2:
+func world_pos_to_tile(position: Vector2) -> Vector2:
+  return tile_map_ground.world_to_map(position)
+
+func world_pos_to_minimap(position: Vector2) -> Vector2:
   return tile_map_ground.world_to_map(position) - chunk_size # add chunk size for border tile
+
+func tile_pos_to_world(position: Vector2) -> Vector2:
+  return tile_map_ground.map_to_world(position) + (tile_size * 0.5) # add half of tile size to get center of tile
 
 func assemble_random_chunks():
   var total_world_size = world_size + Vector2(2,2)
@@ -118,7 +125,7 @@ func spawn_extraction():
       extraction.position = extraction_spawn_point.position
       y_sort.add_child(extraction)
       
-      extraction_tile_position = global_position_to_no_border_tile_position(extraction.global_position)
+      extraction_tile_minimap_position = world_pos_to_minimap(extraction.global_position)
       spawned = true
 
 func load_world_chunks():

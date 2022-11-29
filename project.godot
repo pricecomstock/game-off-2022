@@ -75,6 +75,11 @@ _global_script_classes=[ {
 "path": "res://levels/entities/PlayerSpawnPoint.gd"
 }, {
 "base": "Resource",
+"class": "RandomStringPool",
+"language": "GDScript",
+"path": "res://writing/RandomStringPool.gd"
+}, {
+"base": "Resource",
 "class": "SharedInt",
 "language": "GDScript",
 "path": "res://data_references/SharedInt.gd"
@@ -108,6 +113,7 @@ _global_script_class_icons={
 "LetterSeal": "",
 "LetterView": "",
 "PlayerSpawnPoint": "",
+"RandomStringPool": "",
 "SharedInt": "",
 "Shooter": "",
 "Stats": "",
@@ -127,7 +133,6 @@ SpawnManager="*res://enemies/SpawnManager.tscn"
 GlobalPlayerInfo="*res://player/GlobalPlayerInfo.gd"
 Events="*res://global/Events.tscn"
 GameManager="*res://global/GameManager.tscn"
-DialogueManager="*res://dialogue/DialogueManager.tscn"
 CameraManager="*res://ui/camera/CameraManager.gd"
 LetterManager="*res://letters/LetterManager.tscn"
 RunFacts="*res://global/RunFacts.tscn"
@@ -242,6 +247,7 @@ map={
 2d_physics/layer_6="delivery"
 2d_physics/layer_7="player-safety"
 2d_physics/layer_8="player-nearby"
+2d_physics/layer_9="low-walls"
 
 [physics]
 
