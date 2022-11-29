@@ -3,7 +3,7 @@
 [ext_resource path="res://enemies/Spikes.tscn" type="PackedScene" id=3]
 [ext_resource path="res://levels/TileMapDungeon.tres" type="TileSet" id=5]
 [ext_resource path="res://enemies/Spawner.tscn" type="PackedScene" id=6]
-[ext_resource path="res://enemies/Melee/MeleeMob.tscn" type="PackedScene" id=7]
+[ext_resource path="res://enemies/melee/MeleeMob.tscn" type="PackedScene" id=7]
 [ext_resource path="res://NPCs/Recipient.tscn" type="PackedScene" id=8]
 
 [node name="TestChunk" type="Node2D"]

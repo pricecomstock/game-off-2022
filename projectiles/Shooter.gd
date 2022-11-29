@@ -8,7 +8,8 @@ export(PackedScene) var projectile
 export(AudioStream) var sound_effect
 
 func _ready():
-  audio_player.set_stream(sound_effect)
+  if (audio_player):
+    audio_player.set_stream(sound_effect)
 
 func shoot(velocity: Vector2):
   var new_projectile = projectile.instance()

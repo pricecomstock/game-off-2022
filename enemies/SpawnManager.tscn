@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://enemies/SpawnManager.gd" type="Script" id=1]
+[ext_resource path="res://enemies/shooter/ShooterMob.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -9,7 +10,7 @@ tracks/0/path = NodePath(".:max_simul_spawns")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -21,7 +22,7 @@ tracks/1/path = NodePath(".:target_enemy_count")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -61,8 +62,8 @@ tracks/1/keys = {
 [node name="SpawnManager" type="Node"]
 script = ExtResource( 1 )
 spawn_cycle_seconds = 2.0
-target_enemy_count = 5
-max_simul_spawns = 1
+target_enemy_budget = 3
+spawnable_enemies = [ ExtResource( 3 ) ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )

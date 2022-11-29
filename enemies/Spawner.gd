@@ -1,6 +1,6 @@
 extends Node2D
 
-export(PackedScene) var entity_to_spawn
+export(PackedScene) var entity_to_autospawn
 export var spawn_time := 5.0
 export var auto_spawn := false
 
@@ -27,14 +27,16 @@ func _ready():
   player_nearby_detector.connect("area_exited", self, "_on_player_not_nearby")
 
 func _on_spawn_timer_timeout():
-  if (auto_spawn):
-    spawn()
+  if (auto_spawn and entity_to_autospawn):
+    print("autospawn")
+    spawn(entity_to_autospawn)
 
-func spawn():
+func spawn(entity_to_spawn: PackedScene):
   var entity = entity_to_spawn.instance()
-
-  entity.position = position
+  print("spawning ", entity)
   get_parent().add_child(entity)
+
+  entity.global_position = global_position
 
 # Player is too close and we need to disable spawner
 func _on_player_close(_area: Area2D):

@@ -6,6 +6,7 @@ signal health_zero
 export var speed := 100
 export var friction := 20.0
 export var flee_time := 4.0
+export var spawn_budget_cost := 1
 # The distance at which a path destination is considered reached and we move onto the next one
 export var path_destination_threshold := 4.0
 
@@ -184,7 +185,6 @@ func calculate_path_to_player():
 func set_velocity_towards_next_nav_waypoint():
   # TODO maybe skip ahead until there isn't LOS? might be hard
   if (path.size() == 0):
-    print("no valid path")
     return
     
   if (path_current_destination_index >= path.size()):
