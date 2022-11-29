@@ -6,5 +6,9 @@ export var knockback_force := 20
 
 func _init() -> void:
   pass
-  # collision_layer = 2
-  # collision_mask = 0
+
+func disable():
+  monitorable = false
+
+func enable():
+  monitorable = true

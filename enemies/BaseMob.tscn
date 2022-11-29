@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://art/tilemap_packed.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Hurtbox.gd" type="Script" id=2]
@@ -9,6 +9,10 @@ radius = 6.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 8.0
+
+[sub_resource type="Animation" id=5]
+resource_name = "Death"
+length = 0.1
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -70,6 +74,7 @@ tracks/1/keys = {
 collision_layer = 8
 collision_mask = 273
 script = ExtResource( 3 )
+friction = 1000.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -88,6 +93,7 @@ script = ExtResource( 2 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Death = SubResource( 5 )
 anims/RESET = SubResource( 3 )
 anims/hit = SubResource( 4 )
 
@@ -97,3 +103,7 @@ anims/hit = SubResource( 4 )
 unique_name_in_owner = true
 enabled = true
 collision_mask = 256
+
+[node name="PathRecalcCooldownTimer" type="Timer" parent="."]
+wait_time = 0.79
+one_shot = true

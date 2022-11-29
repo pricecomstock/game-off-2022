@@ -9,14 +9,10 @@ radius = 9.0
 
 [node name="MeleeMob" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-speed = 140
-visualize_path = true
+speed = 120
 player_nearby_threshold = 150.0
 player_nearby_check_seconds = 0.9
-min_move_time = 0.3
-max_move_time = 0.45
-random_direction_probability = 0.1
-flee_time = 3.0
+health = 2
 
 [node name="HitBox" type="Area2D" parent="." index="5"]
 collision_layer = 2
