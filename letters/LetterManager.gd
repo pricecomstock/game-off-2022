@@ -30,9 +30,6 @@ func add_letter(letter: Letter):
 
   emit_signal("letters_updated", letters_dict)
   emit_signal("letter_added", letter_id, letter)
-  
-  GameManager.temp_pause(show_on_add_seconds)
-  yield(GameManager, "unpaused")
 
       
 

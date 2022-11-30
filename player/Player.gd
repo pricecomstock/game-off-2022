@@ -125,6 +125,7 @@ func unfreeze():
   controls_enabled = true
 
 func kill() -> void:
+  can_take_damage = false
   controls_enabled = false
   Events.emit_signal("player_death", self.global_position)
 
@@ -149,7 +150,6 @@ func respawn():
   get_parent().add_child(respawn_player)
   respawn_player.show_respawn()
 
-  set_invulnerability_until(respawn_player, "respawn_finished")
   
   yield(respawn_player, "respawn_finished")
   initialize()

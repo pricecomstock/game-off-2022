@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name BaseMob
 
 signal health_change
 signal health_zero
@@ -19,10 +20,12 @@ export var player_nearby_check_seconds := 0.3
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var movement_timer : Timer = $MovementTimer
 onready var player_line_of_walk_detector : RayCast2D = get_node("%PlayerLineOfWalkDetector")
+onready var player_line_of_sight_detector : RayCast2D = get_node("%PlayerLineOfSightDetector")
 onready var path_recalc_cooldown_timer = $PathRecalcCooldownTimer
 
 var path_visualization : Line2D
 var has_line_of_walk_to_player = false
+var has_line_of_sight_to_player = false
 
 enum MovementState { PLAYER_NEARBY, NAVIGATING_TO_PLAYER, FLEEING, ATTACKING, DEAD }
 
@@ -58,44 +61,49 @@ func _ready():
 
 func _physics_process(delta):
   los_check()
-  calculate_movement()
+  calculate_behavior_for_state()
   calculate_extra_velocity(delta)
   move_and_slide(velocity + extra_velocity)
 
 func los_check():
   var player_offset = GlobalPlayerInfo.player_global_position() - global_position
+
   player_line_of_walk_detector.cast_to = player_offset
   player_line_of_walk_detector.force_raycast_update()
   has_line_of_walk_to_player = !player_line_of_walk_detector.is_colliding()
+
+  player_line_of_sight_detector.cast_to = player_offset
+  player_line_of_sight_detector.force_raycast_update()
+  has_line_of_sight_to_player = !player_line_of_sight_detector.is_colliding()
 
 func calculate_extra_velocity(delta):
   extra_velocity = extra_velocity.move_toward(Vector2.ZERO, delta * friction)
 
 # this should have something for each state
-func calculate_movement():
+func calculate_behavior_for_state():
   match current_move_state:
     MovementState.PLAYER_NEARBY:
-      calculate_player_nearby_velocity()
+      calculate_player_nearby_behavior()
     MovementState.NAVIGATING_TO_PLAYER:
-      calculate_navigate_to_player_velocity()
+      calculate_navigate_to_player_behavior()
     MovementState.FLEEING:
-      calculate_flee_velocity()
+      calculate_flee_behavior()
     MovementState.ATTACKING:
-      calculate_attack_velocity()
+      calculate_attack_behavior()
     MovementState.DEAD:
       pass
 
-func calculate_player_nearby_velocity():
+func calculate_player_nearby_behavior():
   velocity = get_direction_to_player() * speed
 
-func calculate_navigate_to_player_velocity():
+func calculate_navigate_to_player_behavior():
   set_velocity_towards_next_nav_waypoint()
 
-func calculate_flee_velocity():
+func calculate_flee_behavior():
   velocity = -get_direction_to_player() * speed
 
-func calculate_attack_velocity():
-  pass
+func calculate_attack_behavior():
+  velocity = Vector2.ZERO
 
 func change_move_state(new_state):
   var previous_move_state = current_move_state
@@ -107,6 +115,8 @@ func change_move_state(new_state):
     MovementState.FLEEING:
       # Revert to previous state after a bit
       delay_change_move_state(previous_move_state, flee_time)
+    MovementState.NAVIGATING_TO_PLAYER:
+      calculate_path_to_player()
     _:
       pass
   
@@ -130,8 +140,6 @@ func determine_move_mode():
         change_move_state(MovementState.PLAYER_NEARBY)
       else:
         change_move_state(MovementState.NAVIGATING_TO_PLAYER)
-        if previous_move_state != MovementState.NAVIGATING_TO_PLAYER or path_recalc_cooldown_timer.time_left <= 0:
-          calculate_path_to_player()
   
           
 
@@ -175,7 +183,8 @@ func calculate_path_to_player():
   var mob_tile_position = get_tile_position()
   path_current_destination_index = 0
   path = GridNavigation._calculate_path(mob_tile_position, player_tile_position)
-  # print("path from %s to %s of size %s" % [mob_tile_position, player_tile_position, path.size()])
+  if (path.size() == 0):
+    print("path from %s to %s of size %s" % [mob_tile_position, player_tile_position, path.size()])
   if visualize_path:
     path_visualization.width = 2
     path_visualization.default_color = Color.red
@@ -209,5 +218,4 @@ func set_velocity_towards_next_nav_waypoint():
   velocity = speed * path_current_travel_direction
 
 func _on_player_death(_location: Vector2):
-  print("fleeing")
   change_move_state(MovementState.FLEEING)

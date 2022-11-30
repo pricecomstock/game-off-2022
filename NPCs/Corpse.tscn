@@ -17,4 +17,5 @@ region_rect = Rect2( 80, 80, 16, 16 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 
 [node name="Talker" parent="." instance=ExtResource( 5 )]
+talk_duration = 5.0
 string_pool = ExtResource( 4 )

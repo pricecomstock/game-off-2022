@@ -15,7 +15,8 @@ func clear() -> void:
   Util.remove_all_children(self)
 
 func _on_letter_added(letter_id, _letter):
-  inspect_letter(letter_id)
+  GameManager.pause_game()
+  inspect_letter(letter_id, true)
 
   # GameManager.pause_until(self, "inspection_stopped")
   # yikes, assuming paused somewhere but probably ok
@@ -32,8 +33,8 @@ func add_letter_to_display(letter_id: int, letter: Letter) -> void:
   new_node.connect("mouse_exited", self, "stop_inspect")
 
 
-func inspect_letter(id):
-  emit_signal("letter_inspected", id)
+func inspect_letter(id, with_button = false):
+  emit_signal("letter_inspected", id, with_button)
 
 func stop_inspect():
   emit_signal("inspection_stopped")
