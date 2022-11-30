@@ -11,13 +11,13 @@ func _ready():
   letter_view.hide()
   report.hide()
 
-func _on_letter_inspected(id):
+func _on_letter_inspected(id, with_button = false):
   var letter = LetterManager.get_letters()[id]
   if (!letter):
     print("invalid letter id", id)
     return
 
-  letter_view.display_letter(letter)
+  letter_view.display_letter(letter, with_button)
   letter_view.show()
 
 func _on_inspection_stopped():

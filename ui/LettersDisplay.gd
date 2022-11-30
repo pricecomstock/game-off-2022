@@ -18,9 +18,8 @@ func _on_letter_added(letter_id, _letter):
   GameManager.pause_game()
   inspect_letter(letter_id, true)
 
-  # GameManager.pause_until(self, "inspection_stopped")
-  # yikes, assuming paused somewhere but probably ok
-  yield(GameManager, "unpaused")
+  yield(Events, "confirm_button_clicked")
+  GameManager.unpause_game()
   stop_inspect()
 
 

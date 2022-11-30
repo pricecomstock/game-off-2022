@@ -14,5 +14,8 @@ signal player_max_health_change(amount)
 
 signal enemy_killed
 
+# UI
+signal confirm_button_clicked
+
 func _ready():
   pass
