@@ -71,7 +71,7 @@ func process_ranged_attack():
   
   if shot:
     Events.emit_signal("player_shoot")
-    ranged_cooldown_timer.start(ranged_attack_cooldown_seconds)
+    ranged_cooldown_timer.start(ranged_attack_cooldown_seconds * (1 / GlobalStats.get_stat(Stats.ATTRIBUTES.RATE_OF_FIRE_MULTIPLIER)))
 
 func _physics_process(delta):
   if !controls_enabled:

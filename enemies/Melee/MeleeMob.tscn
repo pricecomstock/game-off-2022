@@ -10,6 +10,7 @@ radius = 9.0
 [node name="MeleeMob" instance=ExtResource( 3 )]
 script = ExtResource( 1 )
 speed = 120
+friction = 0.5
 spawn_budget_cost = 2
 player_nearby_threshold = 150.0
 player_nearby_check_seconds = 0.9

@@ -1,8 +1,30 @@
-[gd_resource type="AnimatedTexture" format=2]
+[gd_resource type="AnimatedTexture" load_steps=6 format=2]
+
+[ext_resource path="res://art/forest_topdown/plain_.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 208, 96 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 128, 208, 96 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 240, 208, 96 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 352, 208, 96 )
 
 [resource]
-frames = 5
+frames = 4
+fps = 0.0
+frame_0/texture = SubResource( 1 )
+frame_1/texture = SubResource( 2 )
 frame_1/delay_sec = 0.0
+frame_2/texture = SubResource( 3 )
 frame_2/delay_sec = 0.0
+frame_3/texture = SubResource( 4 )
 frame_3/delay_sec = 0.0
-frame_4/delay_sec = 0.0

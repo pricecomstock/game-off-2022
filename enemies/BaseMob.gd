@@ -5,7 +5,7 @@ signal health_change
 signal health_zero
 
 export var speed := 100
-export var friction := 20.0
+export var friction := 0.2
 export var flee_time := 4.0
 export var spawn_budget_cost := 1
 # The distance at which a path destination is considered reached and we move onto the next one
@@ -31,10 +31,15 @@ var has_line_of_sight_to_player = false
 enum MovementState { PLAYER_NEARBY, NAVIGATING_TO_PLAYER, FLEEING, ATTACKING, DEAD }
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+# The intended movement of the entity
 var velocity := Vector2.ZERO
 
 # for handling things like knockback
 var extra_velocity := Vector2.ZERO
+
+# The actual movement of the entity (without knockback)
+var _actual_velocity := Vector2.ZERO
 var current_move_state = MovementState.PLAYER_NEARBY
 var determine_move_mode_timer : Timer
 
@@ -61,9 +66,12 @@ func _ready():
   determine_move_mode()
 
 func _physics_process(delta):
+  despawn_check()
   los_check()
   calculate_behavior_for_state()
   calculate_extra_velocity(delta)
+
+  _actual_velocity += (velocity - _actual_velocity) * friction
   move_and_slide(velocity + extra_velocity)
 
 func los_check():
@@ -78,7 +86,7 @@ func los_check():
   has_line_of_sight_to_player = !player_line_of_sight_detector.is_colliding()
 
 func calculate_extra_velocity(delta):
-  extra_velocity = extra_velocity.move_toward(Vector2.ZERO, delta * friction)
+  extra_velocity = extra_velocity.move_toward(Vector2.ZERO, friction)
 
 # this should have something for each state
 func calculate_behavior_for_state():
@@ -224,4 +232,5 @@ func _on_player_death(_location: Vector2):
 func despawn_check():
   if get_distance_to_player() > despawn_distance:
     print("Despawning")
-    kill()
+    get_parent().remove_child(self)
+    queue_free()
