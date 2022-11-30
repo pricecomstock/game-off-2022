@@ -10,6 +10,7 @@ export var flee_time := 4.0
 export var spawn_budget_cost := 1
 # The distance at which a path destination is considered reached and we move onto the next one
 export var path_destination_threshold := 4.0
+export var despawn_distance := 350
 
 export var visualize_path := false
 
@@ -219,3 +220,8 @@ func set_velocity_towards_next_nav_waypoint():
 
 func _on_player_death(_location: Vector2):
   change_move_state(MovementState.FLEEING)
+
+func despawn_check():
+  if get_distance_to_player() > despawn_distance:
+    print("Despawning")
+    kill()

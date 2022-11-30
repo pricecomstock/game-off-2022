@@ -63,6 +63,7 @@ tracks/1/keys = {
 [node name="SpawnManager" type="Node"]
 script = ExtResource( 1 )
 spawn_cycle_seconds = 2.0
+target_enemy_budget = 5
 spawnable_enemies = [ ExtResource( 3 ), ExtResource( 2 ) ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
